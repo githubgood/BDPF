@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xunfang.bdpf.mllib.assembly.mapper.JoinAssemblyMapper">
+  <resultMap id="BaseResultMap" type="com.xunfang.bdpf.mllib.assembly.entity.JoinAssembly">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="bdpf_mllib_assembly_left_id" jdbcType="VARCHAR" property="bdpfMllibAssemblyLeftId" />
+    <result column="bdpf_mllib_assembly_right_id" jdbcType="VARCHAR" property="bdpfMllibAssemblyRightId" />
+    <result column="join_type" jdbcType="INTEGER" property="joinType" />
+    <result column="join_condition" jdbcType="VARCHAR" property="joinCondition" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, bdpf_mllib_assembly_left_id, bdpf_mllib_assembly_right_id, join_type, join_condition
+  </sql>
+  <select id="selectByExample" parameterType="com.xunfang.bdpf.mllib.assembly.entity.JoinAssemblyExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from bdpf_mllib_assembly_join
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from bdpf_mllib_assembly_join
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from bdpf_mllib_assembly_join
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.xunfang.bdpf.mllib.assembly.entity.JoinAssemblyExample">
+    delete from bdpf_mllib_assembly_join
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.xunfang.bdpf.mllib.assembly.entity.JoinAssembly">
+    insert into bdpf_mllib_assembly_join (id, bdpf_mllib_assembly_left_id, bdpf_mllib_assembly_right_id, 
+      join_type, join_condition)
+    values (#{id,jdbcType=VARCHAR}, #{bdpfMllibAssemblyLeftId,jdbcType=VARCHAR}, #{bdpfMllibAssemblyRightId,jdbcType=VARCHAR}, 
+      #{joinType,jdbcType=INTEGER}, #{joinCondition,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xunfang.bdpf.mllib.assembly.entity.JoinAssembly">
+    insert into bdpf_mllib_assembly_join
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="bdpfMllibAssemblyLeftId != null">
+        bdpf_mllib_assembly_left_id,
+      </if>
+      <if test="bdpfMllibAssemblyRightId != null">
+        bdpf_mllib_assembly_right_id,
+      </if>
+      <if test="joinType != null">
+        join_type,
+      </if>
+      <if test="joinCondition != null">
+        join_condition,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="bdpfMllibAssemblyLeftId != null">
+        #{bdpfMllibAssemblyLeftId,jdbcType=VARCHAR},
+      </if>
+      <if test="bdpfMllibAssemblyRightId != null">
+        #{bdpfMllibAssemblyRightId,jdbcType=VARCHAR},
+      </if>
+      <if test="joinType != null">
+        #{joinType,jdbcType=INTEGER},
+      </if>
+      <if test="joinCondition != null">
+        #{joinCondition,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.xunfang.bdpf.mllib.assembly.entity.JoinAssemblyExample" resultType="java.lang.Long">
+    select count(*) from bdpf_mllib_assembly_join
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update bdpf_mllib_assembly_join
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bdpfMllibAssemblyLeftId != null">
+        bdpf_mllib_assembly_left_id = #{record.bdpfMllibAssemblyLeftId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bdpfMllibAssemblyRightId != null">
+        bdpf_mllib_assembly_right_id = #{record.bdpfMllibAssemblyRightId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.joinType != null">
+        join_type = #{record.joinType,jdbcType=INTEGER},
+      </if>
+      <if test="record.joinCondition != null">
+        join_condition = #{record.joinCondition,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update bdpf_mllib_assembly_join
+    set id = #{record.id,jdbcType=VARCHAR},
+      bdpf_mllib_assembly_left_id = #{record.bdpfMllibAssemblyLeftId,jdbcType=VARCHAR},
+      bdpf_mllib_assembly_right_id = #{record.bdpfMllibAssemblyRightId,jdbcType=VARCHAR},
+      join_type = #{record.joinType,jdbcType=INTEGER},
+      join_condition = #{record.joinCondition,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xunfang.bdpf.mllib.assembly.entity.JoinAssembly">
+    update bdpf_mllib_assembly_join
+    <set>
+      <if test="bdpfMllibAssemblyLeftId != null">
+        bdpf_mllib_assembly_left_id = #{bdpfMllibAssemblyLeftId,jdbcType=VARCHAR},
+      </if>
+      <if test="bdpfMllibAssemblyRightId != null">
+        bdpf_mllib_assembly_right_id = #{bdpfMllibAssemblyRightId,jdbcType=VARCHAR},
+      </if>
+      <if test="joinType != null">
+        join_type = #{joinType,jdbcType=INTEGER},
+      </if>
+      <if test="joinCondition != null">
+        join_condition = #{joinCondition,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xunfang.bdpf.mllib.assembly.entity.JoinAssembly">
+    update bdpf_mllib_assembly_join
+    set bdpf_mllib_assembly_left_id = #{bdpfMllibAssemblyLeftId,jdbcType=VARCHAR},
+      bdpf_mllib_assembly_right_id = #{bdpfMllibAssemblyRightId,jdbcType=VARCHAR},
+      join_type = #{joinType,jdbcType=INTEGER},
+      join_condition = #{joinCondition,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+
+</mapper>

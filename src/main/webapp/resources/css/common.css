@@ -1,0 +1,315 @@
+@charset "utf-8";
+.ly-bg {
+  background-color: #f8fafb;
+}
+a:hover,
+a:focus {
+  text-decoration: none;
+  color: #fff;
+}
+.base-color {
+  color: #0c84f4;
+}
+:-moz-placeholder {
+  /* Mozilla Firefox 4 to 18 */
+  color: #a0b7cd;
+  opacity: 1;
+  font-size: 14px;
+}
+::-moz-placeholder {
+  /* Mozilla Firefox 19+ */
+  color: #a0b7cd;
+  opacity: 1;
+}
+input:-ms-input-placeholder {
+  color: #a0b7cd;
+  opacity: 1;
+}
+input::-webkit-input-placeholder {
+  color: #a0b7cd;
+  opacity: 1;
+}
+.login-header,
+.login-footer {
+  width: 100%;
+  background-color: #d6e2ee;
+}
+.login-header {
+  height: 80px;
+  line-height: 80px;
+  padding-top:18px ;
+}
+.login-footer {
+  height: 50px;
+  line-height: 50px;
+}
+.footer-text {
+  font-size: 14px;
+  color: #67737e;
+}
+.login-main {
+  width: 100%;
+  height: 540px;
+  position: relative;
+  margin: 0 auto;
+  overflow: hidden;
+  z-index: 1;
+}
+.login-bg {
+  width: 100%;
+  height: 540px;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.login-bg .login-img {
+  display: inline-block;
+  width: 1920px;
+  position: absolute;
+  left: 50%;
+  margin-left: -960px;
+}
+.login-bg .login-img img {
+  width: 100%;
+  height: 540px;
+}
+.login-box {
+  right: 56px;
+  top: 65px;
+  width: 480px ;
+  height: 410px;
+  z-index: 2;
+}
+.login-box .mlr60 {
+  margin: 0 60px;
+}
+.login-box li:first-child {
+  font-size: 36px ;
+  line-height: 36px;
+}
+.login-box .form-item {
+  width: 360px ;
+  height: 44px;
+  border: 1px solid #a0b7cd;
+}
+.login-box .form-item input {
+  border: none;
+  width: 80%;
+  height: 42px;
+  line-height: 42px;
+}
+.login-box .user-box:before,
+.login-box .psw-box:before {
+  content: "";
+  margin: 11px 10px 0 18px;
+  display: inline-block;
+  width: 20px ;
+  height: 21px;
+  vertical-align: top;
+}
+.login-box .user-box:before {
+  background: url(../images/icon-1.png) no-repeat;
+  background-position: -1px -1px;
+}
+.login-box .psw-box:before {
+  height: 22px;
+  background: url(../images/icon-1.png) no-repeat;
+  background-position: -26px -1px;
+}
+.radio + .radio,
+.checkbox + .checkbox {
+  margin-top: 0;
+}
+.radio_box {
+  display: inline-block;
+  min-width: 25px;
+}
+input[type='radio'].radio {
+  position: absolute;
+  opacity: 0;
+  filter: progid:DXImageTransform.Microsoft.Alpha(opacity=0);
+  z-index: 3;
+  outline: none;
+}
+span.radio {
+  background: url(../images/no_radio.png) no-repeat;
+  display: inline-block;
+  padding-left: 20px;
+  height: 14px;
+  line-height: 12px;
+  font-size: 14px;
+  color: #2b3443;
+}
+.error-bg {
+  background-color: #f5eac1;
+}
+input[type='radio'].radio:checked + span.radio {
+  background: url(../images/radio.png) no-repeat;
+}
+.common-btn {
+  display: inline-block;
+  font-weight: normal;
+  text-align: center;
+  white-space: nowrap;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-image: none;
+  color: #fff;
+  border: 1px solid transparent;
+}
+.login-btn {
+  width: 360px;
+  height: 44px;
+  font-size: 18px;
+  line-height: 42px;
+  border-radius: 22px;
+  background-color: #0c84f4;
+  letter-spacing: 25px;
+  text-indent: 25px;
+}
+.login-btn:hover {
+  color: #fff;
+  background-color: #56a8f5;
+}
+/*---------/header-----------*/
+.fa {
+  background-color: #0b141d;
+}
+.nav-bc {
+  background-color: #2b3443;
+}
+.logo-2013 {
+  float: left;
+  height: 42px;
+  width: 307px;
+  margin-top: 9px;
+}
+.login-info {
+  display: table;
+  height: 40px;
+  line-height: 40px;
+}
+.login-info .ix-user-name {
+  position: relative;
+  font-size: 12px ;
+  color: #bebfc2;
+}
+.login-info .ix-user-name + span > a {
+  color: #0d8bfc;
+}
+.login-info .ix-user-name:before {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  top: -2px;
+  left: -25px;
+  width: 20px;
+  height: 20px;
+  background: url(../images/icon-1.png) no-repeat -49px -1px;
+}
+.hNav {
+  height: 60px;
+  line-height: 60px;
+}
+.hNav li {
+  float: left;
+  height: 60px;
+  line-height: 60px;
+  position: relative;
+}
+.hNav li a {
+  float: left;
+  display: block;
+  margin-right: 40px;
+  font: 16px/60px "Hiragino Sans GB", "Microsoft YaHei";
+  height: 60px;
+  color: #bebfc2;
+  font-weight: bold;
+}
+.hNav li a:hover {
+  color: #fff;
+}
+.hNav li.current a {
+  color: #0c84f4;
+}
+.hNav .mr_10 {
+  margin-right: -10px;
+}
+.hNav .dropdown_menu {
+  position: absolute;
+  top: 58px;
+  left: -20px;
+  display: none;
+  width: 120px;
+  background: rgba(11, 20, 29, 0.8);
+  border-bottom: 1px solid #2b3443;
+  z-index: 4;
+}
+.hNav .dropdown_menu dd {
+  width: 120px;
+  height: 35px;
+}
+.hNav .dropdown_menu dd a {
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  line-height: 35px;
+  font-size: 16px ;
+  color: #bebfc2;
+  border-bottom: 1px solid #fff;
+}
+.hNav .dropdown_menu dd:last-child a {
+  border-bottom: none;
+}
+.hNav .dropdown_menu dd a:hover {
+  background-color: #0b141d;
+  color: #0d8bfc;
+}
+.index-footer {
+  width: 100%;
+  height: 60px;
+  background-color: #2b3443;
+  color: #bebfc2;
+}
+.index-footer > div {
+  line-height: 60px;
+}
+/*-----index-----*/
+/*-------paging------*/
+.com-paging {
+  padding-top: 30px;
+  display: table;
+  margin: 0 auto;
+}
+.com-paging .page_number {
+  float: left;
+  text-align: center;
+  margin-right: 10px;
+  padding: 9px 0px;
+  font-size: 14px;
+  color: #67737e;
+  border: 1px solid #d6e1ee;
+  background-color: #eaebed;
+  border-radius: 3px;
+  cursor: pointer;
+}
+.com-paging .page_number:hover {
+  color: #fff;
+  background-color: #0c84f4;
+}
+.com-paging .w55 {
+  width: 55px;
+}
+.com-paging .w40 {
+  width: 40px;
+}
+.com-paging .total_num {
+  line-height: 36px;
+}
+/*------/paging------*/

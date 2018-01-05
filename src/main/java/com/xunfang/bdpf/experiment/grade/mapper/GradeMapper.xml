@@ -1,0 +1,896 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xunfang.bdpf.experiment.grade.mapper.GradeMapper">
+  <resultMap id="BaseResultMap" type="com.xunfang.bdpf.experiment.grade.entity.Grade">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="class_id" jdbcType="VARCHAR" property="classId" />
+    <result column="student_id" jdbcType="VARCHAR" property="studentId" />
+    <result column="teacher_id" jdbcType="VARCHAR" property="teacherId" />
+    <result column="course_task_id" jdbcType="VARCHAR" property="courseTaskId" />
+    <result column="group_id" jdbcType="VARCHAR" property="groupId" />
+    <result column="report_book" jdbcType="VARCHAR" property="reportBook" />
+    <result column="score" jdbcType="INTEGER" property="score" />
+    <result column="comment" jdbcType="VARCHAR" property="comment" />
+    <result column="begin_attendance" jdbcType="TIMESTAMP" property="beginAttendance" />
+    <result column="last_attendance" jdbcType="TIMESTAMP" property="lastAttendance" />
+    <result column="task_status" jdbcType="INTEGER" property="taskStatus" />
+    <result column="report_status" jdbcType="INTEGER" property="reportStatus" />
+    <result column="md5" jdbcType="VARCHAR" property="md5" />
+    <result column="num" jdbcType="INTEGER" property="num" />
+    <result column="time" jdbcType="VARCHAR" property="time" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, class_id, student_id, teacher_id, course_task_id, group_id, report_book, score, 
+    comment, begin_attendance, last_attendance, task_status, report_status,md5,num,time
+  </sql>
+  <select id="selectByExample" parameterType="com.xunfang.bdpf.experiment.grade.entity.GradeExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from bdpf_experiment_grade
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from bdpf_experiment_grade
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from bdpf_experiment_grade
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.xunfang.bdpf.experiment.grade.entity.GradeExample">
+    delete from bdpf_experiment_grade
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.xunfang.bdpf.experiment.grade.entity.Grade">
+    insert into bdpf_experiment_grade (id, class_id, student_id, 
+      teacher_id, course_task_id, group_id, 
+      report_book, score, comment, 
+      begin_attendance, last_attendance, task_status, 
+      report_status,md5,num,time)
+    values (#{id,jdbcType=VARCHAR}, #{classId,jdbcType=VARCHAR}, #{studentId,jdbcType=VARCHAR}, 
+      #{teacherId,jdbcType=VARCHAR}, #{courseTaskId,jdbcType=VARCHAR}, #{groupId,jdbcType=VARCHAR}, 
+      #{reportBook,jdbcType=VARCHAR}, #{score,jdbcType=INTEGER}, #{comment,jdbcType=VARCHAR}, 
+      #{beginAttendance,jdbcType=TIMESTAMP}, #{lastAttendance,jdbcType=TIMESTAMP}, #{taskStatus,jdbcType=INTEGER}, 
+      #{reportStatus,jdbcType=INTEGER},#{md5,jdbcType=VARCHAR},#{num,jdbcType=INTEGER},#{time,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xunfang.bdpf.experiment.grade.entity.Grade">
+    insert into bdpf_experiment_grade
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="classId != null">
+        class_id,
+      </if>
+      <if test="studentId != null">
+        student_id,
+      </if>
+      <if test="teacherId != null">
+        teacher_id,
+      </if>
+      <if test="courseTaskId != null">
+        course_task_id,
+      </if>
+      <if test="groupId != null">
+        group_id,
+      </if>
+      <if test="reportBook != null">
+        report_book,
+      </if>
+      <if test="score != null">
+        score,
+      </if>
+      <if test="comment != null">
+        comment,
+      </if>
+      <if test="beginAttendance != null">
+        begin_attendance,
+      </if>
+      <if test="lastAttendance != null">
+        last_attendance,
+      </if>
+      <if test="taskStatus != null">
+        task_status,
+      </if>
+      <if test="reportStatus != null">
+        report_status,
+      </if>
+      <if test="md5 != null">
+        md5,
+      </if>
+      <if test="num != null">
+        num,
+      </if>
+      <if test="time != null">
+        time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="classId != null">
+        #{classId,jdbcType=VARCHAR},
+      </if>
+      <if test="studentId != null">
+        #{studentId,jdbcType=VARCHAR},
+      </if>
+      <if test="teacherId != null">
+        #{teacherId,jdbcType=VARCHAR},
+      </if>
+      <if test="courseTaskId != null">
+        #{courseTaskId,jdbcType=VARCHAR},
+      </if>
+      <if test="groupId != null">
+        #{groupId,jdbcType=VARCHAR},
+      </if>
+      <if test="reportBook != null">
+        #{reportBook,jdbcType=VARCHAR},
+      </if>
+      <if test="score != null">
+        #{score,jdbcType=INTEGER},
+      </if>
+      <if test="comment != null">
+        #{comment,jdbcType=VARCHAR},
+      </if>
+      <if test="beginAttendance != null">
+        #{beginAttendance,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastAttendance != null">
+        #{lastAttendance,jdbcType=TIMESTAMP},
+      </if>
+      <if test="taskStatus != null">
+        #{taskStatus,jdbcType=INTEGER},
+      </if>
+      <if test="reportStatus != null">
+        #{reportStatus,jdbcType=INTEGER},
+      </if>
+      <if test="md5 != null">
+        #{md5,jdbcType=VARCHAR},
+      </if>
+      <if test="num != null">
+        #{num,jdbcType=INTEGER},
+      </if>
+      <if test="time != null">
+        #{time,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.xunfang.bdpf.experiment.grade.entity.GradeExample" resultType="java.lang.Long">
+    select count(*) from bdpf_experiment_grade
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update bdpf_experiment_grade
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.classId != null">
+        class_id = #{record.classId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.studentId != null">
+        student_id = #{record.studentId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.teacherId != null">
+        teacher_id = #{record.teacherId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.courseTaskId != null">
+        course_task_id = #{record.courseTaskId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.groupId != null">
+        group_id = #{record.groupId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reportBook != null">
+        report_book = #{record.reportBook,jdbcType=VARCHAR},
+      </if>
+      <if test="record.score != null">
+        score = #{record.score,jdbcType=INTEGER},
+      </if>
+      <if test="record.comment != null">
+        comment = #{record.comment,jdbcType=VARCHAR},
+      </if>
+      <if test="record.beginAttendance != null">
+        begin_attendance = #{record.beginAttendance,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastAttendance != null">
+        last_attendance = #{record.lastAttendance,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.taskStatus != null">
+        task_status = #{record.taskStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.reportStatus != null">
+        report_status = #{record.reportStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.md5 != null">
+        md5 = #{record.md5,jdbcType=VARCHAR},
+      </if>
+      <if test="record.num != null">
+        num = #{record.num,jdbcType=INTEGER},
+      </if>
+      <if test="record.time != null">
+        time = #{record.time,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update bdpf_experiment_grade
+    set id = #{record.id,jdbcType=VARCHAR},
+      class_id = #{record.classId,jdbcType=VARCHAR},
+      student_id = #{record.studentId,jdbcType=VARCHAR},
+      teacher_id = #{record.teacherId,jdbcType=VARCHAR},
+      course_task_id = #{record.courseTaskId,jdbcType=VARCHAR},
+      group_id = #{record.groupId,jdbcType=VARCHAR},
+      report_book = #{record.reportBook,jdbcType=VARCHAR},
+      score = #{record.score,jdbcType=INTEGER},
+      comment = #{record.comment,jdbcType=VARCHAR},
+      begin_attendance = #{record.beginAttendance,jdbcType=TIMESTAMP},
+      last_attendance = #{record.lastAttendance,jdbcType=TIMESTAMP},
+      task_status = #{record.taskStatus,jdbcType=INTEGER},
+      report_status = #{record.reportStatus,jdbcType=INTEGER},
+      md5 = #{record.md5,jdbcType=VARCHAR},
+      num = #{record.num,jdbcType=INTEGER},
+      time = #{record.time,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xunfang.bdpf.experiment.grade.entity.Grade">
+    update bdpf_experiment_grade
+    <set>
+      <if test="classId != null">
+        class_id = #{classId,jdbcType=VARCHAR},
+      </if>
+      <if test="studentId != null">
+        student_id = #{studentId,jdbcType=VARCHAR},
+      </if>
+      <if test="teacherId != null">
+        teacher_id = #{teacherId,jdbcType=VARCHAR},
+      </if>
+      <if test="courseTaskId != null">
+        course_task_id = #{courseTaskId,jdbcType=VARCHAR},
+      </if>
+      <if test="groupId != null">
+        group_id = #{groupId,jdbcType=VARCHAR},
+      </if>
+      <if test="reportBook != null">
+        report_book = #{reportBook,jdbcType=VARCHAR},
+      </if>
+      <if test="score != null">
+        score = #{score,jdbcType=INTEGER},
+      </if>
+      <if test="comment != null">
+        comment = #{comment,jdbcType=VARCHAR},
+      </if>
+      <if test="beginAttendance != null">
+        begin_attendance = #{beginAttendance,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastAttendance != null">
+        last_attendance = #{lastAttendance,jdbcType=TIMESTAMP},
+      </if>
+      <if test="taskStatus != null">
+        task_status = #{taskStatus,jdbcType=INTEGER},
+      </if>
+      <if test="reportStatus != null">
+        report_status = #{reportStatus,jdbcType=INTEGER},
+      </if>
+      <if test="comment != null">
+        md5 = #{md5,jdbcType=VARCHAR},
+      </if>
+      <if test="num != null">
+        num = #{num,jdbcType=INTEGER},
+      </if>
+      <if test="time != null">
+        time = #{time,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xunfang.bdpf.experiment.grade.entity.Grade">
+    update bdpf_experiment_grade
+    set class_id = #{classId,jdbcType=VARCHAR},
+      student_id = #{studentId,jdbcType=VARCHAR},
+      teacher_id = #{teacherId,jdbcType=VARCHAR},
+      course_task_id = #{courseTaskId,jdbcType=VARCHAR},
+      group_id = #{groupId,jdbcType=VARCHAR},
+      report_book = #{reportBook,jdbcType=VARCHAR},
+      score = #{score,jdbcType=INTEGER},
+      comment = #{comment,jdbcType=VARCHAR},
+      begin_attendance = #{beginAttendance,jdbcType=TIMESTAMP},
+      last_attendance = #{lastAttendance,jdbcType=TIMESTAMP},
+      task_status = #{taskStatus,jdbcType=INTEGER},
+      report_status = #{reportStatus,jdbcType=INTEGER},
+      md5 = #{md5,jdbcType=VARCHAR},
+      num = #{num,jdbcType=INTEGER},
+      time = #{time,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  
+       <insert id="batchInsert" parameterType="java.util.List">
+		insert into bdpf_experiment_grade ( id, class_id, student_id,teacher_id, group_id, report_book, score, comment, begin_attendance, 
+         last_attendance, task_status, report_status,course_task_id,md5,num,time)
+		values
+	<foreach collection="list" index="index" item="item" separator=",">
+			( #{item.id}, #{item.classId}, #{item.studentId},#{item.teacherId}, #{item.groupId},  #{item.reportBook}
+			, #{item.score}, #{item.comment}, #{item.beginAttendance}, #{item.lastAttendance}, #{item.taskStatus}
+			, #{item.reportStatus}, #{item.courseTaskId} , #{item.md5}, #{item.num}, #{item.time})
+   </foreach>
+	</insert>  
+	
+	  <select id="queryGradeByPage" parameterType="Map" resultType="com.xunfang.bdpf.experiment.grade.entity.Grade">
+        select 
+        class.`name` as className,
+         grade.student_id as studentId,
+         u.`name` as studentName, 
+       (case  when (ROUND((sum(grade.score)/COUNT(gradeResource.course_resource_id)),2))is null then 0 ELSE (ROUND((sum(grade.score)/COUNT(gradeResource.course_resource_id)),2)) END) as score
+from 
+        bdpf_experiment_grade grade,
+         bdpf_experiment_class class ,
+        bdpf_system_user u,
+        bdpf_experiment_grade_resource gradeResource
+        where 0=0
+        and  grade.class_id=class.id
+        and grade.student_id=u.account
+        and  grade.id= gradeResource.experiment_grade_id
+
+		<if test="taskId != null and taskId != ''">
+			and grade.course_task_id =#{taskId}
+		</if>
+		<if test="classId != null and classId != ''">
+		  and grade.class_id =#{classId}
+		</if>
+		<if test="studentId != null and studentId != ''">
+		  and grade.student_id =#{studentId}
+		</if>	
+		<if test="teacherId != null and teacherId != ''">
+		  and grade.teacher_id =#{teacherId}
+		</if>							
+       GROUP BY  grade.student_id
+		limit ${skip},${limit}
+ </select> 
+ 
+ 	  <select id="getGradeCount" parameterType="Map" resultType="com.xunfang.bdpf.experiment.grade.entity.Grade">
+        select 
+        class.`name` as className,
+         grade.student_id as studentId,
+         u.`name` as studentName, 
+       (case  when (ROUND((sum(grade.score)/COUNT(gradeResource.course_resource_id)),2))is null then 0 ELSE (ROUND((sum(grade.score)/COUNT(gradeResource.course_resource_id)),2)) END) as score
+from 
+        bdpf_experiment_grade grade,
+         bdpf_experiment_class class ,
+        bdpf_system_user u,
+        bdpf_experiment_grade_resource gradeResource
+        where 0=0
+        and  grade.class_id=class.id
+        and grade.student_id=u.account
+        and  grade.id= gradeResource.experiment_grade_id
+		<if test="taskId != null and taskId != ''">
+			and grade.course_task_id =#{taskId}
+		</if>
+		<if test="classId != null and classId != ''">
+		  and grade.class_id =#{classId}
+		</if>	
+		<if test="studentId != null and studentId != ''">
+		  and grade.student_id =#{studentId}
+		</if>	
+		<if test="teacherId != null and teacherId != ''">
+		  and grade.teacher_id =#{teacherId}
+		</if>				
+       GROUP BY  grade.student_id
+ </select> 
+ 
+<select id="queryDetailByPage" parameterType="Map" resultType="com.xunfang.bdpf.experiment.grade.entity.Grade">
+        select 
+         class.`name` as className,
+         courseResource.course_resource_type as courseResourceType,
+         courseResource.title as title,
+         grade.student_id as studentId,
+         u.`name` as studentName, 
+         ( case when grade.task_status = 0 then 0 else grade.score end )as taskStatus,
+         ( case when grade.score is null then 0 else grade.score end )as score    
+from 
+        bdpf_experiment_grade grade,
+         bdpf_experiment_class class ,
+        bdpf_system_user u,
+        bdpf_experiment_grade_resource gradeResource,
+        bdpf_experiment_course_resource courseResource
+        where 0=0
+        and  grade.class_id=class.id
+        and grade.student_id=u.account
+        and  grade.id= gradeResource.experiment_grade_id
+        and  gradeResource.course_resource_id=courseResource.id
+		<if test="taskId != null and taskId != ''">
+			and grade.course_task_id =#{taskId}
+		</if>
+		<if test="classId != null and classId != ''">
+		  and grade.class_id =#{classId}
+		</if>
+		<if test="studentId != null and studentId != ''">
+		 and  grade.student_id  =#{studentId}
+		</if>
+		<if test="title != null and title != ''">
+		  and courseResource.title =#{title}
+		</if>
+		order by courseResource.xh
+		limit ${skip},${limit}
+ </select> 
+ 
+ <select id="getDetailCount" parameterType="Map" resultType="com.xunfang.bdpf.experiment.grade.entity.Grade">
+        select 
+         class.`name` as className,
+         courseResource.course_resource_type as courseResourceType,
+         courseResource.title as title,
+         grade.student_id as studentId,
+         u.`name` as studentName, 
+        ( case when grade.score is null then 0 else grade.score end )as score       
+from 
+        bdpf_experiment_grade grade,
+         bdpf_experiment_class class ,
+        bdpf_system_user u,
+        bdpf_experiment_grade_resource gradeResource,
+        bdpf_experiment_course_resource courseResource
+        where 0=0
+        and  grade.class_id=class.id
+        and grade.student_id=u.account
+        and  grade.id= gradeResource.experiment_grade_id
+        and  gradeResource.course_resource_id=courseResource.id
+		<if test="taskId != null and taskId != ''">
+			and grade.course_task_id =#{taskId}
+		</if>
+		<if test="classId != null and classId != ''">
+		  and grade.class_id =#{classId}
+		</if>
+		<if test="studentId != null and studentId != ''">
+		 and  grade.student_id  =#{studentId}
+		</if>				
+ </select> 
+ 
+  <select id="queryCheckByPage" parameterType="Map" resultType="com.xunfang.bdpf.experiment.grade.entity.Grade">
+        select 
+        courseResource.id as courseResourceId,
+         class.id as classId,
+         courseResource.title as title , 
+         courseResource.course_resource_type as courseResourceType,
+         class.`name` as className,
+         sum(grade.task_status) as sumTaskStatus, 
+         count(grade.student_id) as countStudentId,
+         (case  when (sum(grade.task_status)/ count(grade.student_id)=0 )then 0 
+         when ((sum(grade.task_status)/ count(grade.student_id)>0) and 1>(sum(grade.task_status)/ count(grade.student_id)))then 1
+         else 2 end ) as taskStatus
+from 
+        bdpf_experiment_grade grade,
+         bdpf_experiment_class class ,
+        bdpf_experiment_grade_resource gradeResource,
+         bdpf_experiment_course_resource courseResource
+        where 0=0
+        and  grade.class_id=class.id
+        and  grade.id= gradeResource.experiment_grade_id
+        and gradeResource.course_resource_id=courseResource.id
+        and grade.report_status = 1
+		<if test="taskId != null and taskId != ''">
+			and grade.course_task_id =#{taskId}
+		</if>
+		<if test="classId != null and classId != ''">
+		  and grade.class_id =#{classId}
+		</if>
+		<if test="title != null and title != ''">
+		 and courseResource.title like '%${title}%'
+		</if>
+		<if test="teacherId != null and teacherId != ''">
+		 and grade.teacher_id=#{teacherId}
+		</if>		
+     GROUP BY  courseResource.id ,class.id
+     order by courseResource.xh
+     limit ${skip},${limit}	
+ </select> 
+ 
+   <select id="getCheckCount" parameterType="Map" resultType="com.xunfang.bdpf.experiment.grade.entity.Grade">
+        select 
+         courseResource.title as title ,
+         courseResource.course_resource_type as courseResourceType,
+         class.`name` as className,
+         (case  when (sum(grade.task_status)/ count(grade.student_id)=0 )then 0 
+         when ((sum(grade.task_status)/ count(grade.student_id)>0) and 1>(sum(grade.task_status)/ count(grade.student_id)))then 1
+         else 2 end ) as taskStatus
+from 
+        bdpf_experiment_grade grade,
+         bdpf_experiment_class class ,
+        bdpf_experiment_grade_resource gradeResource,
+         bdpf_experiment_course_resource courseResource
+        where 0=0
+        and  grade.class_id=class.id
+        and  grade.id= gradeResource.experiment_grade_id
+        and gradeResource.course_resource_id=courseResource.id
+        and grade.report_status = 1
+		<if test="taskId != null and taskId != ''">
+			and grade.course_task_id =#{taskId}
+		</if>
+		<if test="classId != null and classId != ''">
+		  and grade.class_id =#{classId}
+		</if>
+		<if test="title != null and title != ''">
+		  and courseResource.title like '%${title}%'
+		</if>
+		<if test="teacherId != null and teacherId != ''">
+		 and grade.teacher_id=#{teacherId}
+		</if>		
+     GROUP BY  courseResource.id ,class.id	
+ </select> 
+ 
+  <select id="queryPersonListByPage" parameterType="Map" resultType="com.xunfang.bdpf.experiment.grade.entity.Grade">
+        select 
+         grade.id as id,
+         grade.report_book as reportBook,      
+         courseResource.title as title ,
+         grade.student_id as studentId,
+         grade.score as score
+from 
+        bdpf_experiment_grade grade,
+         bdpf_experiment_class class ,
+        bdpf_experiment_grade_resource gradeResource,
+         bdpf_experiment_course_resource courseResource
+        where 0=0
+        and  grade.class_id=class.id
+        and  grade.id= gradeResource.experiment_grade_id
+        and gradeResource.course_resource_id=courseResource.id
+        and  grade.report_status=1
+		<if test="taskId != null and taskId != ''">
+			and grade.course_task_id =#{taskId}
+		</if>
+		<if test="classId != null and classId != ''">
+		  and grade.class_id =#{classId}
+		</if>
+		<if test="courseResourceId != null and courseResourceId != ''">
+		 and courseResource.id=#{courseResourceId}
+		</if>
+		<if test="taskStatus != null and taskStatus != ''">
+		 and grade.task_status=#{taskStatus}
+		</if>			
+		<if test="teacherId != null and teacherId != ''">
+		 and grade.teacher_id=#{teacherId}
+		</if>
+		order by courseResource.xh
+     limit ${skip},${limit}	
+ </select> 
+ 
+   <select id="getPersonListCount" parameterType="Map" resultType="com.xunfang.bdpf.experiment.grade.entity.Grade">
+        select 
+         grade.id as id,
+         courseResource.title as title ,
+         grade.student_id as studentId,
+         grade.score as score
+from 
+        bdpf_experiment_grade grade,
+         bdpf_experiment_class class ,
+        bdpf_experiment_grade_resource gradeResource,
+         bdpf_experiment_course_resource courseResource
+        where 0=0
+        and  grade.class_id=class.id
+        and  grade.id= gradeResource.experiment_grade_id
+        and gradeResource.course_resource_id=courseResource.id
+        and  grade.report_status=1
+		<if test="taskId != null and taskId != ''">
+			and grade.course_task_id =#{taskId}
+		</if>
+		<if test="classId != null and classId != ''">
+		  and grade.class_id =#{classId}
+		</if>
+		<if test="courseResourceId != null and courseResourceId != ''">
+		 and courseResource.id=#{courseResourceId}
+		</if>
+		<if test="taskStatus != null and taskStatus != ''">
+		 and grade.task_status=#{taskStatus}
+		</if>		
+		<if test="teacherId != null and teacherId != ''">
+		 and grade.teacher_id=#{teacherId}
+		</if>
+ </select>
+ 
+ <select id="queryExpListByPage"  parameterType="Map"  resultType="com.xunfang.bdpf.experiment.grade.entity.Grade">
+     select a.id as id,
+     c.title as title,
+     c.course_resource_type as courseResourceType,
+     a.report_status as reportStatus,
+     a.task_status as taskStatus,
+     a.last_attendance as lastAttendance
+     from bdpf_experiment_grade a,bdpf_experiment_grade_resource b,bdpf_experiment_course_resource c
+     where a.id = b.experiment_grade_id and b.course_resource_id = c.id
+	<if test="taskId != null and taskId != ''">
+		and a.course_task_id = #{taskId}
+	</if>
+	<if test="classId != null and classId != ''">
+	  	and a.class_id = #{classId}
+	</if>
+	<if test="studentId != null and studentId != ''">
+	 	and a.student_id = #{studentId}
+	</if>
+	<if test="keywords != null and keywords != ''">
+	 	and c.title like '%${keywords}%'
+	</if>
+	order by c.xh
+	limit ${skip},${limit}
+</select>
+
+<select id="getExpListCount" parameterType="Map" resultType="long">
+	 select count(a.id)
+     from bdpf_experiment_grade a,bdpf_experiment_grade_resource b,bdpf_experiment_course_resource c
+     where a.id = b.experiment_grade_id and b.course_resource_id = c.id
+	<if test="taskId != null and taskId != ''">
+		and a.course_task_id = #{taskId}
+	</if>
+	<if test="classId != null and classId != ''">
+	  	and a.class_id = #{classId}
+	</if>
+	<if test="studentId != null and studentId != ''">
+	 	and a.student_id = #{studentId}
+	</if>
+	<if test="keywords != null and keywords != ''">
+	 	and c.title like '%${keywords}%'
+	</if>
+</select>
+
+  <select id="queryGroupListByPage" parameterType="Map" resultType="com.xunfang.bdpf.experiment.grade.entity.Grade">
+        select 
+         gr.id as groupId,
+         grade.report_book as reportBook,
+         courseResource.title as title ,
+         group_concat(grade.student_id ) as studentId ,
+         gr.`name` AS groupName,
+         grade.score as score
+from 
+        bdpf_experiment_grade grade,
+         bdpf_experiment_class class ,
+        bdpf_experiment_grade_resource gradeResource,
+         bdpf_experiment_course_resource courseResource,
+         bdpf_experiment_group gr
+        where 0=0
+        and  grade.class_id=class.id
+        and  grade.id= gradeResource.experiment_grade_id
+        and gradeResource.course_resource_id=courseResource.id
+        and grade.group_id =gr.id
+        and  grade.report_status=1
+		<if test="taskId != null and taskId != ''">
+			and grade.course_task_id =#{taskId}
+		</if>
+		<if test="classId != null and classId != ''">
+		  and grade.class_id =#{classId}
+		</if>
+		<if test="courseResourceId != null and courseResourceId != ''">
+		 and courseResource.id=#{courseResourceId}
+		</if>
+		<if test="taskStatus != null and taskStatus != ''">
+		 and grade.task_status=#{taskStatus}
+		</if>			
+		<if test="teacherId != null and teacherId != ''">
+		 and grade.teacher_id=#{teacherId}
+		</if>	
+	GROUP BY courseResource.title,gr.id	
+	order by courseResource.xh
+     limit ${skip},${limit}	
+ </select> 
+ 
+  <select id="getGroupListCount" parameterType="Map" resultType="com.xunfang.bdpf.experiment.grade.entity.Grade">
+        select 
+         gr.id as groupId,
+         grade.report_book as reportBook,      
+         courseResource.title as title ,
+        group_concat(grade.student_id ) as studentId ,
+        gr.`name` AS groupName,
+        grade.score as score
+from 
+        bdpf_experiment_grade grade,
+         bdpf_experiment_class class ,
+        bdpf_experiment_grade_resource gradeResource,
+         bdpf_experiment_course_resource courseResource,
+         bdpf_experiment_group gr
+        where 0=0
+        and  grade.class_id=class.id
+        and  grade.id= gradeResource.experiment_grade_id
+        and gradeResource.course_resource_id=courseResource.id
+        and grade.group_id =gr.id
+        and  grade.report_status=1
+		<if test="taskId != null and taskId != ''">
+			and grade.course_task_id =#{taskId}
+		</if>
+		<if test="classId != null and classId != ''">
+		  and grade.class_id =#{classId}
+		</if>
+		<if test="courseResourceId != null and courseResourceId != ''">
+		 and courseResource.id=#{courseResourceId}
+		</if>
+		<if test="taskStatus != null and taskStatus != ''">
+		 and grade.task_status=#{taskStatus}
+		</if>			
+		<if test="teacherId != null and teacherId != ''">
+		 and grade.teacher_id=#{teacherId}
+		</if>	
+		GROUP BY courseResource.title,gr.id	
+ </select> 
+ 
+ <select id="selectExpById"  parameterType="java.lang.String" resultMap="BaseResultMap">
+    select a.id as id,
+     c.title as title,
+     c.course_resource_type as courseResourceType,
+     a.report_status as reportStatus,
+     a.task_status as taskStatus,
+     a.course_task_id as courseTaskId,
+	 a.class_id as classId,
+     a.group_id as groupId,
+     a.student_id as studentId,
+     c.path as reportBook,
+     c.id as courseResourceId,
+     a.time as time,
+	 a.num as num
+     from bdpf_experiment_grade a,bdpf_experiment_grade_resource b,bdpf_experiment_course_resource c
+     where a.id = b.experiment_grade_id and b.course_resource_id = c.id
+	<if test="id != null and id != ''">
+		and a.id = #{id}
+	</if>
+	order by c.xh
+ </select>
+
+<select id="selectByExampleGroupName" parameterType="Map" resultType="com.xunfang.bdpf.system.user.entity.User">
+	  select b.account as account,b.name as name,c.virtual_id as id from bdpf_experiment_grade a,bdpf_system_user b,bdpf_experiment_student_virtual c
+        where a.student_id = b.account
+                  and b.account = c.account
+                  and a.course_task_id = c.course_task_id 
+                  and a.class_id = c.class_id and c.type = #{type}
+		<if test="taskId != null and taskId != ''">
+			and a.course_task_id =#{taskId}
+		</if>
+		<if test="classId != null and classId != ''">
+		  	and a.class_id =#{classId}
+		</if>
+		<if test="groupId != null and groupId != ''">
+		 	and a.group_id =#{groupId}
+		</if>
+		<if test="account != null and account != ''">
+		 	and c.account =#{account}
+		</if>
+		group by b.account,b.name,c.virtual_id
+ </select>
+
+
+  <select id="queryListDetail" parameterType="Map" resultType="com.xunfang.bdpf.experiment.grade.entity.Grade">
+        select 
+         courseResource.title as title , 
+         class.`name` as className,
+         grade.student_id as studentId,
+          u.name as studentName,
+         grade.report_status as reportStatus,
+         grade.task_status as taskStatus
+from 
+        bdpf_experiment_grade grade,
+         bdpf_experiment_class class ,
+        bdpf_experiment_grade_resource gradeResource,
+         bdpf_experiment_course_resource courseResource,
+          bdpf_system_user u
+        where 0=0
+        and  grade.class_id=class.id
+        and  grade.id= gradeResource.experiment_grade_id
+        and gradeResource.course_resource_id=courseResource.id
+        and u.account= grade.student_id 
+		<if test="taskId != null and taskId != ''">
+			and grade.course_task_id =#{taskId}
+		</if>
+		<if test="classId != null and classId != ''">
+		  and grade.class_id =#{classId}
+		</if>
+		<if test="courseResourceId != null and courseResourceId != ''">
+		 and courseResource.id =#{courseResourceId}
+		</if>
+		<if test="teacherId != null and teacherId != ''">
+		 and grade.teacher_id=#{teacherId}
+		</if>
+		order by courseResource.xh
+     limit ${skip},${limit}	
+ </select> 
+ 
+   <select id="queryListCount" parameterType="Map" resultType="com.xunfang.bdpf.experiment.grade.entity.Grade">
+        select 
+         courseResource.title as title , 
+         class.`name` as className,
+         grade.student_id as studentId,
+         u.name as studentName,
+         grade.report_status as reportStatus,
+         grade.task_status as taskStatus
+from 
+        bdpf_experiment_grade grade,
+         bdpf_experiment_class class ,
+        bdpf_experiment_grade_resource gradeResource,
+         bdpf_experiment_course_resource courseResource,
+          bdpf_system_user u
+        where 0=0
+        and  grade.class_id=class.id
+        and  grade.id= gradeResource.experiment_grade_id
+        and gradeResource.course_resource_id=courseResource.id
+        and u.account= grade.student_id 
+		<if test="taskId != null and taskId != ''">
+			and grade.course_task_id =#{taskId}
+		</if>
+		<if test="classId != null and classId != ''">
+		  and grade.class_id =#{classId}
+		</if>
+		<if test="courseResourceId != null and courseResourceId != ''">
+		 and courseResource.id =#{courseResourceId}
+		</if>
+		<if test="teacherId != null and teacherId != ''">
+		 and grade.teacher_id=#{teacherId}
+		</if>			
+ </select> 
+</mapper>

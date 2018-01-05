@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+     <!-- 别名的定义 -->
+    <typeAliases>
+		<!-- 批量别名的定义  指定包名，mybatis扫描包下的entity类，自动定义别名，别名就是类名，首字母大写或小写都可以-->
+		<package name="com.xunfang.bdpf.**.entity"/>
+    </typeAliases>
+</configuration>

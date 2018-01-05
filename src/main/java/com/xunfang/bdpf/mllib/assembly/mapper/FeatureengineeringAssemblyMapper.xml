@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.xunfang.bdpf.mllib.assembly.mapper.FeatureengineeringAssemblyMapper">
+	<resultMap id="BaseResultMap"
+		type="com.xunfang.bdpf.mllib.assembly.entity.FeatureengineeringAssembly">
+		<id column="id" jdbcType="VARCHAR" property="id" />
+		<result column="bdpf_mllib_assembly_id" jdbcType="VARCHAR"
+			property="bdpfMllibAssemblyId" />
+		<result column="name" jdbcType="VARCHAR" property="name" />
+		<result column="proportionality_coefficient" jdbcType="VARCHAR"
+			property="proportionalityCoefficient" />
+		<result column="equidistant_dispersion" jdbcType="VARCHAR"
+			property="equidistantDispersion" />
+		<result column="equidistant_dispersion_interval" jdbcType="VARCHAR"
+			property="equidistantDispersionInterval" />
+		<result column="k" jdbcType="VARCHAR" property="k" />
+	</resultMap>
+	<sql id="Example_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria" separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" prefixOverrides="and" suffix=")">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach close=")" collection="criterion.value" item="listItem"
+										open="(" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Update_By_Example_Where_Clause">
+		<where>
+			<foreach collection="example.oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" prefixOverrides="and" suffix=")">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach close=")" collection="criterion.value" item="listItem"
+										open="(" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		id, bdpf_mllib_assembly_id, name, proportionality_coefficient,
+		equidistant_dispersion,
+		equidistant_dispersion_interval, k
+	</sql>
+	<select id="selectByExample"
+		parameterType="com.xunfang.bdpf.mllib.assembly.entity.FeatureengineeringAssemblyExample"
+		resultMap="BaseResultMap">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from bdpf_mllib_assembly_featureengineering
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+	</select>
+	<select id="selectByPrimaryKey" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from bdpf_mllib_assembly_featureengineering
+		where id = #{id,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from bdpf_mllib_assembly_featureengineering
+		where id = #{id,jdbcType=VARCHAR}
+	</delete>
+	<delete id="deleteByExample"
+		parameterType="com.xunfang.bdpf.mllib.assembly.entity.FeatureengineeringAssemblyExample">
+		delete from bdpf_mllib_assembly_featureengineering
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</delete>
+	<insert id="insert"
+		parameterType="com.xunfang.bdpf.mllib.assembly.entity.FeatureengineeringAssembly">
+		insert into bdpf_mllib_assembly_featureengineering (id,
+		bdpf_mllib_assembly_id, name,
+		proportionality_coefficient, equidistant_dispersion,
+		equidistant_dispersion_interval, k)
+		values (#{id,jdbcType=VARCHAR}, #{bdpfMllibAssemblyId,jdbcType=VARCHAR},
+		#{name,jdbcType=VARCHAR},
+		#{proportionalityCoefficient,jdbcType=VARCHAR},
+		#{equidistantDispersion,jdbcType=VARCHAR},
+		#{equidistantDispersionInterval,jdbcType=VARCHAR},
+		#{k,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective"
+		parameterType="com.xunfang.bdpf.mllib.assembly.entity.FeatureengineeringAssembly">
+		insert into bdpf_mllib_assembly_featureengineering
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="bdpfMllibAssemblyId != null">
+				bdpf_mllib_assembly_id,
+			</if>
+			<if test="name != null">
+				name,
+			</if>
+			<if test="proportionalityCoefficient != null">
+				proportionality_coefficient,
+			</if>
+			<if test="equidistantDispersion != null">
+				equidistant_dispersion,
+			</if>
+			<if test="equidistantDispersionInterval != null">
+				equidistant_dispersion_interval,
+			</if>
+			<if test="k != null">
+				k,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=VARCHAR},
+			</if>
+			<if test="bdpfMllibAssemblyId != null">
+				#{bdpfMllibAssemblyId,jdbcType=VARCHAR},
+			</if>
+			<if test="name != null">
+				#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="proportionalityCoefficient != null">
+				#{proportionalityCoefficient,jdbcType=VARCHAR},
+			</if>
+			<if test="equidistantDispersion != null">
+				#{equidistantDispersion,jdbcType=VARCHAR},
+			</if>
+			<if test="equidistantDispersionInterval != null">
+				#{equidistantDispersionInterval,jdbcType=VARCHAR},
+			</if>
+			<if test="k != null">
+				#{k,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<select id="countByExample"
+		parameterType="com.xunfang.bdpf.mllib.assembly.entity.FeatureengineeringAssemblyExample"
+		resultType="java.lang.Long">
+		select count(*) from bdpf_mllib_assembly_featureengineering
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</select>
+	<update id="updateByExampleSelective" parameterType="map">
+		update bdpf_mllib_assembly_featureengineering
+		<set>
+			<if test="record.id != null">
+				id = #{record.id,jdbcType=VARCHAR},
+			</if>
+			<if test="record.bdpfMllibAssemblyId != null">
+				bdpf_mllib_assembly_id = #{record.bdpfMllibAssemblyId,jdbcType=VARCHAR},
+			</if>
+			<if test="record.name != null">
+				name = #{record.name,jdbcType=VARCHAR},
+			</if>
+			<if test="record.proportionalityCoefficient != null">
+				proportionality_coefficient = #{record.proportionalityCoefficient,jdbcType=VARCHAR},
+			</if>
+			<if test="record.equidistantDispersion != null">
+				equidistant_dispersion = #{record.equidistantDispersion,jdbcType=VARCHAR},
+			</if>
+			<if test="record.equidistantDispersionInterval != null">
+				equidistant_dispersion_interval = #{record.equidistantDispersionInterval,jdbcType=VARCHAR},
+			</if>
+			<if test="record.k != null">
+				k = #{record.k,jdbcType=VARCHAR},
+			</if>
+		</set>
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByExample" parameterType="map">
+		update bdpf_mllib_assembly_featureengineering
+		set id = #{record.id,jdbcType=VARCHAR},
+		bdpf_mllib_assembly_id = #{record.bdpfMllibAssemblyId,jdbcType=VARCHAR},
+		name = #{record.name,jdbcType=VARCHAR},
+		proportionality_coefficient = #{record.proportionalityCoefficient,jdbcType=VARCHAR},
+		equidistant_dispersion =
+		#{record.equidistantDispersion,jdbcType=VARCHAR},
+		equidistant_dispersion_interval =
+		#{record.equidistantDispersionInterval,jdbcType=VARCHAR},
+		k = #{record.k,jdbcType=VARCHAR}
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByPrimaryKeySelective"
+		parameterType="com.xunfang.bdpf.mllib.assembly.entity.FeatureengineeringAssembly">
+		update bdpf_mllib_assembly_featureengineering
+		<set>
+			<if test="bdpfMllibAssemblyId != null">
+				bdpf_mllib_assembly_id = #{bdpfMllibAssemblyId,jdbcType=VARCHAR},
+			</if>
+			<if test="name != null">
+				name = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="proportionalityCoefficient != null">
+				proportionality_coefficient = #{proportionalityCoefficient,jdbcType=VARCHAR},
+			</if>
+			<if test="equidistantDispersion != null">
+				equidistant_dispersion = #{equidistantDispersion,jdbcType=VARCHAR},
+			</if>
+			<if test="equidistantDispersionInterval != null">
+				equidistant_dispersion_interval = #{equidistantDispersionInterval,jdbcType=VARCHAR},
+			</if>
+			<if test="k != null">
+				k = #{k,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey"
+		parameterType="com.xunfang.bdpf.mllib.assembly.entity.FeatureengineeringAssembly">
+		update bdpf_mllib_assembly_featureengineering
+		set bdpf_mllib_assembly_id = #{bdpfMllibAssemblyId,jdbcType=VARCHAR},
+		name = #{name,jdbcType=VARCHAR},
+		proportionality_coefficient = #{proportionalityCoefficient,jdbcType=VARCHAR},
+		equidistant_dispersion = #{equidistantDispersion,jdbcType=VARCHAR},
+		equidistant_dispersion_interval =
+		#{equidistantDispersionInterval,jdbcType=VARCHAR},
+		k = #{k,jdbcType=VARCHAR}
+		where id = #{id,jdbcType=VARCHAR}
+	</update>
+
+	<select id="queryFeatureengineeringAssembly" parameterType="Map"
+		resultMap="BaseResultMap">
+		select
+		a.id as id,
+		a.bdpf_mllib_assembly_id as bdpfMllibAssemblyId,
+		a.name as name,
+		a.proportionality_coefficient as
+		proportionalityCoefficient,
+		a.equidistant_dispersion as
+		equidistantDispersion,
+		a.equidistant_dispersion_interval as
+		equidistantDispersionInterval,
+		a.k as k
+		from
+		bdpf_mllib_assembly_featureengineering a,bdpf_mllib_assembly b
+		where
+		a.bdpf_mllib_assembly_id = b.id
+		<if test="id != null and id != ''">
+			and b.id = '${id}'
+		</if>
+		order by a.bdpf_mllib_assembly_id,a.name
+	</select>
+
+
+	<insert id="batchInsertFeatureengineeringAssembly"
+		parameterType="java.util.List">
+		insert into
+		bdpf_mllib_assembly_featureengineering(id,bdpf_mllib_assembly_id,name,proportionality_coefficient,equidistant_dispersion,equidistant_dispersion_interval,k)
+		values
+		<foreach collection="list" index="index" item="item"
+			separator=",">
+			(#{item.id}, #{item.bdpfMllibAssemblyId},
+			#{item.name},
+			#{item.proportionalityCoefficient}, #{item.equidistantDispersion},
+			#{item.equidistantDispersionInterval}, #{item.K})
+		</foreach>
+	</insert>
+	
+	
+	<update id="updateBybdpfMllibAssemblyId"
+		parameterType="com.xunfang.bdpf.mllib.assembly.entity.FeatureengineeringAssembly">
+		update bdpf_mllib_assembly_featureengineering
+		set 
+		proportionality_coefficient = #{proportionalityCoefficient,jdbcType=VARCHAR}
+		where bdpf_mllib_assembly_id = #{bdpfMllibAssemblyId,jdbcType=VARCHAR}
+	</update>
+</mapper>

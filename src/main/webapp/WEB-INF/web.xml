@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+                 xmlns="http://java.sun.com/xml/ns/javaee"  
+                 xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"  
+                 id="WebApp_ID"  version="3.0" >
+      <!-- 定义了WEB应用的名字 -->
+	 <display-name>BDPF</display-name>
+	 <!--  如果在web.xml里给该Listener指定要加载的xml
+	    	 则会去加载相应的xml,而不会去加载/WEB-INF/下的applicationContext.xml
+	   	  	 但是，如果没有指定的话，默认会去/WEB-INF/下加载applicationContext.xml
+	  -->
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>
+			classpath*:/applicationContext.xml,classpath*:/spring-redis.xml
+	</param-value>
+  </context-param>
+  <!-- Spring的profiles机制，是应对多环境下面的一个解决方案,比较常见的是开发和测试环境的配置。
+  	 	 spring.profiles.default 默认值，优先级低。当active没有配置时，使用此变量。
+  	 	 spring.profiles.active 优先级高，指定当前容器使用哪个profile。
+  	 	 开发环境:development  测试环境:test
+   -->
+  <context-param>
+    <!-- 默认值，优先级低 -->
+    <param-name>spring.profiles.default</param-name>
+    <!-- 开发环境，具体加载bean或者properties文件 -->
+    <param-value>development</param-value>
+  </context-param>
+  <!-- ContextLoaderListener监听器的作用就是启动Web容器时，自动装配ApplicationContext的配置信息 
+     	 因为它实现了ServletContextListener这个接口，在web.xml配置这个监听器，启动容器时，就会默认执行它实现的方法。
+     	 至于ApplicationContext.xml这个配置文件部署在哪，如何配置多个xml文件，书上都没怎么详细说明。
+     	 现在的方法就是查看它的API文档。在ContextLoaderListener中关联了ContextLoader这个类，
+      	 所以整个加载配置过程由ContextLoader来完成
+  -->
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+  <!--一个用户只能在一个主机登录 -->
+  <listener> 
+ 	<listener-class>com.xunfang.security.LoginListenner</listener-class> 
+  </listener>
+  <!-- web容器会自动加载applicationcontext.xml初始化
+         指定配置文件的位置,可通过context-param加以指定 
+  -->
+  <servlet>
+    <servlet-name>springServlet</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <init-param>
+      <param-name>contextConfigLocation</param-name>
+      <param-value>/WEB-INF/spring/spring-mvc.xml</param-value>
+    </init-param>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <!-- 配置URL路径问题,当我们访问任意URL资源时，都被名为spring-MVC的servlet来处理 -->
+  <servlet-mapping>
+    <servlet-name>springServlet</servlet-name>
+    <url-pattern>/</url-pattern>
+  </servlet-mapping>
+  <!-- 字符编码过滤器 -->
+  <filter>
+    <filter-name>encodingFilter</filter-name>
+    <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+    <init-param>
+      <param-name>encoding</param-name>
+      <param-value>UTF-8</param-value>
+    </init-param>
+    <init-param>
+      <param-name>forceEncoding</param-name>
+      <param-value>true</param-value>
+    </init-param>
+  </filter>
+  <!-- 请求是以/products/…开头的，
+         并且是通过request dispatcher的forward方法传递过来或者直接从客户端传递过来的，则必须经过这个过滤器 
+   -->
+  <filter-mapping>
+    <filter-name>encodingFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+    <dispatcher>REQUEST</dispatcher>
+    <dispatcher>FORWARD</dispatcher>
+  </filter-mapping>
+  <!-- 在返回特定HTTP状态代码时，或者特定类型的异常被抛出时，能够制定将要显示的页面 start-->
+  <!-- java中的所有错误和异常的超类都调到  500页面 -->
+  <error-page>
+    <exception-type>java.lang.Throwable</exception-type>
+    <location>/WEB-INF/views/error/500.jsp</location>
+  </error-page>
+  <!-- 400 服务器不理解请求的语法 -->
+   <error-page>
+    <error-code>400</error-code>
+    <location>/WEB-INF/views/error/400.jsp</location>
+  </error-page>
+  <!-- 401 请求要求身份验证。对于登录后请求的网页，服务器可能返回此响应 -->
+  <error-page>
+    <error-code>401</error-code>
+    <location>/WEB-INF/views/error/401.jsp</location>
+  </error-page>
+  <!-- 403 服务器拒绝请求 -->
+  <error-page>
+    <error-code>403</error-code>
+    <location>/WEB-INF/views/error/403.jsp</location>
+  </error-page>
+  <!-- 404 服务器找不到请求的网页 -->
+  <error-page>
+    <error-code>404</error-code>
+    <location>/WEB-INF/views/error/404.jsp</location>
+  </error-page>
+  <!-- 408 服务器等候请求时发生超时 -->
+  <error-page>
+    <error-code>408</error-code>
+    <location>/WEB-INF/views/error/408.jsp</location>
+  </error-page>
+  <!-- 500 服务器遇到错误，无法完成请求 -->
+  <error-page>
+    <error-code>500</error-code>
+    <location>/WEB-INF/views/error/500.jsp</location>
+  </error-page>
+  <!-- 在返回特定HTTP状态代码时，或者特定类型的异常被抛出时，能够制定将要显示的页面 end-->
+</web-app>

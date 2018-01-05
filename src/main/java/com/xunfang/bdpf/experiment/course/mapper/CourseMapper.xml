@@ -1,0 +1,442 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xunfang.bdpf.experiment.course.mapper.CourseMapper">
+	<resultMap id="BaseResultMap"
+		type="com.xunfang.bdpf.experiment.course.entity.Course">
+		<id column="id" jdbcType="VARCHAR" property="id" />
+		<id column="parent_id" jdbcType="VARCHAR" property="parentId" />
+		<result column="xh" jdbcType="INTEGER" property="xh" />
+		<result column="title" jdbcType="VARCHAR" property="title" />
+		<result column="course_resource_type" jdbcType="INTEGER" property="courseResourceType" />
+		<result column="course_mirror_id" jdbcType="VARCHAR" property="courseMirrorId" />
+		<result column="md5" jdbcType="VARCHAR" property="md5" />
+		<result column="file_type" jdbcType="INTEGER" property="fileType" />
+		<result column="path" jdbcType="VARCHAR" property="path" />
+		<result column="description" jdbcType="VARCHAR" property="description" />
+		<result column="create_user" jdbcType="VARCHAR" property="createUser" />
+		<result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+	</resultMap>
+	<sql id="Example_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria" separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" prefixOverrides="and" suffix=")">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value}
+									and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach close=")" collection="criterion.value" item="listItem"
+										open="(" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Update_By_Example_Where_Clause">
+		<where>
+			<foreach collection="example.oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" prefixOverrides="and" suffix=")">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value}
+									and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach close=")" collection="criterion.value" item="listItem"
+										open="(" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		id, parent_id,xh, title, course_resource_type, course_mirror_id,md5, file_type,path,
+		description, create_user, create_time
+	</sql>
+	
+	<select id="selectByExample"
+		parameterType="com.xunfang.bdpf.experiment.course.entity.CourseExample"
+		resultMap="BaseResultMap">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from bdpf_experiment_course_resource
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+	</select>
+	<select id="selectByPrimaryKey" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from bdpf_experiment_course_resource
+		where id = #{id,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from
+		bdpf_experiment_course_resource
+		where id = #{id,jdbcType=VARCHAR}
+	</delete>
+	<delete id="deleteByExample"
+		parameterType="com.xunfang.bdpf.experiment.course.entity.CourseExample">
+		delete from bdpf_experiment_course_resource
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</delete>
+	<insert id="insert" parameterType="com.xunfang.bdpf.experiment.course.entity.Course">
+		insert into
+		bdpf_experiment_course_resource (id, parent_id,xh, title,
+		course_resource_type,
+		course_mirror_id, md5,
+		file_type,
+		path, description,
+		create_user,
+		create_time)
+		values (#{id,jdbcType=VARCHAR}, #{parentId,jdbcType=VARCHAR},#{xh,jdbcType=INTEGER},
+		#{title,jdbcType=VARCHAR},
+		#{courseResourceType,jdbcType=INTEGER},
+		#{courseMirrorId,jdbcType=VARCHAR}, #{md5,jdbcType=INTEGER},
+		#{fileType,jdbcType=INTEGER}, #{path,jdbcType=VARCHAR},
+		#{description,jdbcType=VARCHAR},
+		#{createUser,jdbcType=VARCHAR},
+		#{createTime,jdbcType=TIMESTAMP})
+	</insert>
+	<insert id="insertSelective" parameterType="com.xunfang.bdpf.experiment.course.entity.Course">
+		insert into bdpf_experiment_course_resource
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="parentId != null">
+				parent_id,
+			</if>
+			<if test="xh != null">
+				xh,
+			</if>
+			<if test="title != null">
+				title,
+			</if>
+			<if test="courseResourceType != null">
+				course_resource_type,
+			</if>
+			<if test="courseMirrorId != null">
+				course_mirror_id,
+			</if>
+			<if test="md5 != null">
+				md5,
+			</if>
+			<if test="fileType != null">
+				file_type,
+			</if>
+			<if test="path != null">
+				path,
+			</if>
+			<if test="description != null">
+				description,
+			</if>
+			<if test="createUser != null">
+				create_user,
+			</if>
+			<if test="createTime != null">
+				create_time,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=VARCHAR},
+			</if>
+			<if test="parentId != null">
+				#{parentId,jdbcType=VARCHAR},
+			</if>
+			<if test="xh != null">
+				#{xh,jdbcType=INTEGER},
+			</if>
+			<if test="title != null">
+				#{title,jdbcType=VARCHAR},
+			</if>
+			<if test="courseResourceType != null">
+				#{courseResourceType,jdbcType=INTEGER},
+			</if>
+			<if test="courseMirrorId != null">
+				#{courseMirrorId,jdbcType=VARCHAR},
+			</if>
+			<if test="md5 != null">
+				#{md5,jdbcType=INTEGER},
+			</if>
+			<if test="fileType != null">
+				#{fileType,jdbcType=INTEGER},
+			</if>
+			<if test="path != null">
+				#{path,jdbcType=VARCHAR},
+			</if>
+			<if test="description != null">
+				#{description,jdbcType=VARCHAR},
+			</if>
+			<if test="createUser != null">
+				#{createUser,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<select id="countByExample"
+		parameterType="com.xunfang.bdpf.experiment.course.entity.CourseExample"
+		resultType="java.lang.Long">
+		select count(*) from bdpf_experiment_course_resource
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</select>
+	<update id="updateByExampleSelective" parameterType="map">
+		update bdpf_experiment_course_resource
+		<set>
+			<if test="record.id != null">
+				id = #{record.id,jdbcType=VARCHAR},
+			</if>
+			<if test="record.id != null">
+				parent_id = #{record.parentId,jdbcType=VARCHAR},
+			</if>
+			<if test="record.xh != null">
+				xh = #{record.xh,jdbcType=INTEGER},
+			</if>
+			<if test="record.title != null">
+				title = #{record.title,jdbcType=VARCHAR},
+			</if>
+			<if test="record.courseResourceType != null">
+				course_resource_type =
+				#{record.courseResourceType,jdbcType=INTEGER},
+			</if>
+			<if test="record.courseMirrorId != null">
+				course_mirror_id =
+				#{record.courseMirrorId,jdbcType=VARCHAR},
+			</if>
+			<if test="record.md5 != null">
+				md5 = #{record.md5,jdbcType=INTEGER},
+			</if>
+			<if test="record.fileType != null">
+				file_type = #{record.fileType,jdbcType=INTEGER},
+			</if>
+			<if test="record.path != null">
+				path = #{record.path,jdbcType=VARCHAR},
+			</if>
+			<if test="record.description != null">
+				description = #{record.description,jdbcType=VARCHAR},
+			</if>
+			<if test="record.createUser != null">
+				create_user = #{record.createUser,jdbcType=VARCHAR},
+			</if>
+			<if test="record.createTime != null">
+				create_time = #{record.createTime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByExample" parameterType="map">
+		update bdpf_experiment_course_resource
+		set id =#{record.id,jdbcType=VARCHAR},
+		parent_id =#{record.parentId,jdbcType=VARCHAR},
+		xh = #{record.xh,jdbcType=INTEGER},
+		title = #{record.title,jdbcType=VARCHAR},
+		course_resource_type =#{record.courseResourceType,jdbcType=INTEGER},
+		course_mirror_id =#{record.courseMirrorId,jdbcType=VARCHAR},
+		md5 =#{record.md5,jdbcType=INTEGER},
+		file_type =#{record.fileType,jdbcType=INTEGER},
+		path = #{record.path,jdbcType=VARCHAR},
+		description =#{record.description,jdbcType=VARCHAR},
+		create_user =#{record.createUser,jdbcType=VARCHAR},
+		create_time =#{record.createTime,jdbcType=TIMESTAMP}
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByPrimaryKeySelective" parameterType="com.xunfang.bdpf.experiment.course.entity.Course">
+		update bdpf_experiment_course_resource
+		<set>
+			<if test="parentId != null">
+				parent_id = #{parentId,jdbcType=VARCHAR},
+			</if>
+			<if test="xh != null">
+				xh = #{xh,jdbcType=INTEGER},
+			</if>
+			<if test="title != null">
+				title = #{title,jdbcType=VARCHAR},
+			</if>
+			<if test="courseResourceType != null">
+				course_resource_type =#{courseResourceType,jdbcType=INTEGER},
+			</if>
+			<if test="courseMirrorId != null">
+				course_mirror_id =#{courseMirrorId,jdbcType=VARCHAR},
+			</if>
+			<if test="md5 != null">
+				md5 = #{md5,jdbcType=INTEGER},
+			</if>
+			<if test="fileType != null">
+				file_type = #{fileType,jdbcType=INTEGER},
+			</if>
+			<if test="path != null">
+				path = #{path,jdbcType=VARCHAR},
+			</if>
+			<if test="description != null">
+				description = #{description,jdbcType=VARCHAR},
+			</if>
+			<if test="createUser != null">
+				create_user = #{createUser,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				create_time = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where id = #{id,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.xunfang.bdpf.experiment.course.entity.Course">
+		update
+		bdpf_experiment_course_resource
+		set parent_id = #{parentId,jdbcType=VARCHAR},
+		xh = #{xh,jdbcType=INTEGER},
+		title =#{title,jdbcType=VARCHAR},
+		course_resource_type =#{courseResourceType,jdbcType=INTEGER},
+		course_mirror_id =#{courseMirrorId,jdbcType=VARCHAR},
+		md5 = #{md5,jdbcType=INTEGER},
+		file_type = #{fileType,jdbcType=INTEGER},
+		path =#{path,jdbcType=VARCHAR},
+		description =#{description,jdbcType=VARCHAR},
+		create_user =#{createUser,jdbcType=VARCHAR},
+		create_time=#{createTime,jdbcType=TIMESTAMP}
+		where id = #{id,jdbcType=VARCHAR}
+	</update>
+	<select id="queryCourseByPage" parameterType="Map" resultType="com.xunfang.bdpf.experiment.course.entity.Course">
+		select
+		a.id as id, 
+		a.parent_id as parentId,
+		a.xh as xh, 
+		a.title as title, 
+		a.course_resource_type as courseResourceType,
+		a.course_mirror_id as courseMirrorId,
+		a.md5 as md5, 
+		a.file_type as fileType,
+		a.path as path,
+		a.description as description , 
+		b.name as createUser, 
+		a.create_time as createTime
+		from
+		bdpf_experiment_course_resource  a left JOIN bdpf_system_user b ON a.create_user=b.account
+		where 1=1
+		<if test="createUser != null and createUser != ''">
+			and a.create_user = '${createUser}'
+		</if>
+		<if test="keywords != null and keywords != ''">
+			and a.title like '%${keywords}%'
+		</if>
+		order by a.xh
+		limit ${skip},${limit}
+	</select>
+
+	<select id="getCourseCount" parameterType="Map" resultType="long">
+		select count(id)
+		from bdpf_experiment_course_resource
+		where 1=1
+		<if test="createUser != null and createUser != ''">
+			and create_user = '${createUser}'
+		</if>
+		<if test="keywords != null and keywords != ''">
+			and title like '%${keywords}%'
+		</if>
+	</select>
+
+	<select id="queryMaxXh" resultType="long">
+		select
+		(case when xh is null then 1 else max(xh)+1 end) as xh
+		from
+		bdpf_experiment_course_resource
+		where xh is not null
+	</select>
+
+
+<select id="getCourseTypeCount" parameterType="Map" resultType="long">
+		select count(id)
+		from bdpf_experiment_course_resource
+		where 0 = 0
+		<if test="id != null and id != ''">
+			and id != '${id}'
+		</if>
+		<if test="type >=0">
+			and file_type = ${type}
+		</if>
+		<if test="keywords != null and keywords != ''">
+			and title like '%${keywords}%'
+		</if>
+	</select>
+	
+	<select id="queryCourseByTypePage" parameterType="Map" resultType="com.xunfang.bdpf.experiment.course.entity.Course">
+		select 
+		a.id as id, 
+		a.parent_id as parentId,
+		a.xh as xh,
+		a.title as title, 
+		a.course_resource_type as courseResourceType,
+		a.course_mirror_id as courseMirrorId,
+		a.md5 as md5, 
+		a.file_type as  fileType,
+		a.path as path,
+		a.description as description, 
+		b.name as createUser, 
+		a.create_time as createTime
+		from
+		bdpf_experiment_course_resource a
+		left join bdpf_system_user b
+		on a.create_user = b.account
+		where 0=0
+		<if test="id != null and id != ''">
+			and a.id != '${id}'
+		</if>
+		<if test="keywords != null and keywords != ''">
+			and a.title like '%${keywords}%'
+		</if>
+		<if test="type >=0">
+			and a.file_type = ${type}
+		</if>
+		order by a.xh
+		limit ${skip},${limit}
+	</select>
+</mapper>

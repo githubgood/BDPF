@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xunfang.bdpf.mllib.assembly.mapper.EchartsMapper">
+	<resultMap id="BaseResultMap" type="com.xunfang.bdpf.mllib.assembly.entity.Columns">
+		<result column="column_name" jdbcType="VARCHAR" property="column" />
+		<result column="data_type" jdbcType="VARCHAR" property="dataType" />
+		<result column="table_name" jdbcType="VARCHAR" property="tableName" />
+		<result column="rownum" jdbcType="VARCHAR" property="rownum" />
+
+	</resultMap>
+
+	<!-- 根据表名查询列名 -->
+	<select id="getColumnByTable" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select @rownum:=@rownum+1 AS
+		rownum,s.column_name,s.data_type
+		from information_schema.columns
+		s,(SELECT @rownum:=0) r where
+		s.table_name= #{tableName}
+	</select>
+
+	<!-- 至折线（面积图） -->
+	<select id="getLine" parameterType="java.util.Map" resultType="Map"
+		statementType="STATEMENT">
+		select count(*) AS "firstParame", ${columnName} AS
+		"secondParame"
+		from heart_disease_prediction group by ${columnName}
+	</select>
+
+	<!-- 散点图 -->
+	<select id="getScatter" parameterType="java.util.Map"
+		resultType="Map" statementType="STATEMENT">
+		select count(*) AS "firstParame",
+		${columnName} AS
+		"secondParame"
+		from heart_disease_prediction group by
+		${columnName}
+	</select>
+
+	<!-- K线图 -->
+	<select id="getKLine" parameterType="java.util.Map" resultType="Map"
+		statementType="STATEMENT">
+			select sum(${columnNameB}) AS
+		"firstParame",ceil(MAX(${columnNameA}+0)) AS
+		"thirdParame",ceil(MIN(${columnNameA}+0)) AS
+		"forthParame",ceil(AVG(${columnNameA}))
+		AS
+		"fifthParame" from
+		heart_disease_prediction group by ${columnNameB}
+	</select>
+
+	<!-- 柱状图 -->
+	<select id="getBar" parameterType="java.util.Map" resultType="Map"
+		statementType="STATEMENT">
+		select count(*) AS "firstParame", ${columnName} AS
+		"secondParame"
+		from heart_disease_prediction group by ${columnName}
+	</select>
+
+	<!-- 饼（圆环）图 -->
+	<select id="getPie" parameterType="java.util.Map" resultType="Map"
+		statementType="STATEMENT">
+		select count(*) AS "firstParame", ${columnName} AS
+		"secondParame"
+		from heart_disease_prediction group by ${columnName}
+	</select>
+
+	<!-- 漏斗图  -->
+	<select id="getFunnel" parameterType="java.util.Map" resultType="Map"
+		statementType="STATEMENT">
+		select count(*) AS "firstParame", ${columnName} AS
+		"secondParame"
+		from heart_disease_prediction group by ${columnName}
+	</select>
+
+	<!-- 矩形树图  -->
+	<select id="getRectangle" parameterType="java.util.Map"
+		resultType="Map" statementType="STATEMENT">
+		select count(*) AS "firstParame",
+		${columnName} AS
+		"secondParame"
+		from heart_disease_prediction group by
+		${columnName}
+	</select>
+
+	<!-- 获取表中数据条数 -->
+	<select id="getCount" resultType="java.lang.Long" statementType="STATEMENT">
+		select
+		ceil(count(*)/4) from
+		heart_disease_prediction ;
+	</select>
+
+	<!-- 和弦图  -->
+	<select id="getChord" parameterType="java.util.Map" resultType="Map"
+		statementType="STATEMENT">
+		select count(*) AS
+		"firstParame",ceil(MAX(${columnNameA}+0)) AS
+		"thirdParame",ceil(MIN(${columnNameA}+0)) AS
+		"forthParame",ceil(AVG(${columnNameA}))
+		AS
+		"fifthParame" from (select
+		${columnNameA} from
+		heart_disease_prediction limit 0,${columnNameB}) t1
+		Union all
+		select
+		count(*) AS "firstParame",ceil(MAX(${columnNameA}+0))
+		AS
+		"thirdParame",ceil(MIN(${columnNameA}+0)) AS
+		"forthParame",ceil(AVG(${columnNameA}))
+		AS
+		"fifthParame" from (select
+		${columnNameA} from
+		heart_disease_prediction limit
+		${columnNameB},${columnNameB}) t2
+		Union
+		all
+		select count(*) AS
+		"firstParame",ceil(MAX(${columnNameA}+0)) AS
+		"thirdParame",ceil(MIN(${columnNameA}+0)) AS
+		"forthParame",ceil(AVG(${columnNameA}))
+		AS
+		"fifthParame" from (select
+		${columnNameA} from
+		heart_disease_prediction limit
+		${columnNameC},${columnNameB}) t3
+		Union
+		all
+		select count(*) AS
+		"firstParame",ceil(MAX(${columnNameA}+0)) AS
+		"thirdParame",ceil(MIN(${columnNameA}+0)) AS
+		"forthParame",ceil(AVG(${columnNameA}))
+		AS
+		"fifthParame" from (select
+		${columnNameA} from
+		heart_disease_prediction limit
+		${columnNameD},${columnNameB}) t4;
+	</select>
+
+	<!-- 混搭图 -->
+	<select id="getMix" parameterType="java.util.Map" resultType="Map"
+		statementType="STATEMENT">
+		select ${columnNameB} AS
+		"firstParame",ceil(MAX(${columnNameA}+0)) AS
+		"thirdParame",ceil(MIN(${columnNameA}+0)) AS
+		"forthParame",ceil(AVG(${columnNameA}))
+		AS
+		"fifthParame" from
+		heart_disease_prediction group by ${columnNameB}
+	</select>
+
+	<!-- 力导向布局图  -->
+	<select id="getForce" parameterType="java.util.Map" resultType="Map"
+		statementType="STATEMENT">
+		select count(*) AS
+		"firstParame",ceil(MAX(${columnNameA}+0)) AS
+		"thirdParame",ceil(MIN(${columnNameA}+0)) AS
+		"forthParame",ceil(AVG(${columnNameA}))
+		AS
+		"fifthParame" from (select
+		${columnNameA} from
+		heart_disease_prediction limit 0,${columnNameB}) t1
+		Union all
+		select
+		count(*) AS "firstParame",ceil(MAX(${columnNameA}+0
+		))
+		AS
+		"thirdParame",ceil(MIN(${columnNameA}+0)) AS
+		"forthParame",ceil(AVG(${columnNameA}))
+		AS
+		"fifthParame" from (select
+		${columnNameA} from
+		heart_disease_prediction limit
+		${columnNameB},${columnNameB}) t2
+		Union
+		all
+		select count(*) AS
+		"firstParame",ceil(MAX(${columnNameA}+0)) AS
+		"thirdParame",ceil(MIN(${columnNameA}+0)) AS
+		"forthParame",ceil(AVG(${columnNameA}))
+		AS
+		"fifthParame" from (select
+		${columnNameA} from
+		heart_disease_prediction limit
+		${columnNameC},${columnNameB}) t3
+		Union
+		all
+		select count(*) AS
+		"firstParame",ceil(MAX(${columnNameA}+0)) AS
+		"thirdParame",ceil(MIN(${columnNameA}+0)) AS
+		"forthParame",ceil(AVG(${columnNameA}))
+		AS
+		"fifthParame" from (select
+		${columnNameA} from
+		heart_disease_prediction limit
+		${columnNameD},${columnNameB}) t4;
+	</select>
+	
+	<!-- 雷达图 -->
+	<select id="getRadar" parameterType="java.util.Map" resultType="Map"
+		statementType="STATEMENT">
+		select count(*) AS
+		"firstParame",ceil(SUM(${columnName})) AS
+		"secondParame",ceil(MAX(${columnName}+0)) AS
+		"thirdParame",ceil(MIN(${columnName}+0)) AS
+		"forthParame",ceil(AVG(${columnName}))
+		AS
+		"fifthParame" from
+		heart_disease_prediction
+	</select>
+
+	<!-- 仪表盘图 -->
+	<select id="getGauge" parameterType="java.util.Map" resultType="Map"
+		statementType="STATEMENT">
+		select ceil(AVG(${columnName})/MAX(${columnName}+0)*100) AS
+		"firstParame" from
+		heart_disease_prediction
+	</select>
+	
+	<!-- 韦恩图  -->
+	<select id="getVenn" parameterType="java.util.Map" resultType="Map"
+		statementType="STATEMENT">
+		select ceil(MAX(${columnName}+0)) AS
+		"firstParame",ceil(MIN(${columnName}+0)) AS
+		"secondParame",ceil(AVG(${columnName}))
+		AS
+		"thirdParame" from
+		heart_disease_prediction
+	</select>
+
+	<!-- 热力图  -->
+	<select id="getHeatmap" parameterType="java.util.Map"
+		resultType="Map" statementType="STATEMENT">
+		select ceil(MIN(${columnName}+0)) AS
+		"firstParame",ceil(MAX(${columnName}+0)) AS
+		"secondParame",count(${columnName})
+		AS
+		"thirdParame" from
+		heart_disease_prediction
+	</select>
+	
+	<!-- 字符云图 -->
+	<select id="getWordCloud" parameterType="java.util.Map"
+		resultType="Map" statementType="STATEMENT">
+		select
+		ceil(MIN(ifnull(${columnName},100))) AS"minParame",
+		ceil(MAX(ifnull(${columnName},100))) AS "maxParame",
+		count(ifnull(${columnName},100)) AS "countParame",
+		ceil(BIT_AND(ifnull(${columnName},100))) AS "bigAndParame",
+		ceil(BIT_OR(ifnull(${columnName},100))) AS "bigOrParame",
+		ceil(BIT_XOR(ifnull(${columnName},100))) AS "bigXorParame",
+		ceil(STDDEV_POP(ifnull(${columnName},100))) AS "stdPopParame",
+		ceil(STDDEV_SAMP(ifnull(${columnName},100))) AS "stdDampParame",
+		ceil(VAR_SAMP(ifnull(${columnName},100))) AS "varSampParame",
+		ceil(VAR_POP(ifnull(${columnName},100))) AS "varPopParame",
+		ceil(AVG(ifnull(${columnName},100))) AS "avgParame",
+		ceil(SUM(ifnull(${columnName},100))) AS "sumParame" from
+		heart_disease_prediction
+	</select>
+
+	<!-- 树图  -->
+	<select id="getTree" parameterType="java.util.Map" resultType="Map"
+		statementType="STATEMENT">
+			select ${columnNameA} AS
+		"firstParame",${columnNameB} AS
+		"secondParame" ,${columnNameC} AS
+		"thirdParame" from
+		bdpf_mllib_assembly_library 
+	</select>
+	
+	<!-- 地图 -->
+	<select id="getMap" parameterType="java.util.Map" resultType="Map"
+		statementType="STATEMENT">
+		select ${columnNameA} AS "columnPram",
+		count(${columnNameA}) AS "countPram",
+		ceil(avg(${columnNameB}+0)) AS "avgPram",
+		ceil(min(${columnNameB}+0)) AS "minPram",
+		ceil(MAX(${columnNameB}+0)) AS "maxPram"
+		from bdpf_mllib_city 
+		group by ${columnNameA};
+	</select>
+
+</mapper>

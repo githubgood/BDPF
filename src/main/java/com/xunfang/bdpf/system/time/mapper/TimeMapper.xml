@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xunfang.bdpf.system.time.mapper.TimeMapper">
+  <resultMap id="BaseResultMap" type="com.xunfang.bdpf.system.time.entity.Time">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="min_time" jdbcType="VARCHAR" property="minTime" />
+    <result column="max_time" jdbcType="VARCHAR" property="maxTime" />
+    <result column="add_time" jdbcType="VARCHAR" property="addTime" />
+    <result column="max_number" jdbcType="VARCHAR" property="maxNumber" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, min_time, max_time, add_time, max_number
+  </sql>
+  <select id="selectByExample" parameterType="com.xunfang.bdpf.system.time.entity.TimeExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from bdpf_system_experiment_time
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from bdpf_system_experiment_time
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from bdpf_system_experiment_time
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.xunfang.bdpf.system.time.entity.TimeExample">
+    delete from bdpf_system_experiment_time
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.xunfang.bdpf.system.time.entity.Time">
+    insert into bdpf_system_experiment_time (id, min_time, max_time, 
+      add_time, max_number)
+    values (#{id,jdbcType=VARCHAR}, #{minTime,jdbcType=VARCHAR}, #{maxTime,jdbcType=VARCHAR}, 
+      #{addTime,jdbcType=VARCHAR}, #{maxNumber,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xunfang.bdpf.system.time.entity.Time">
+    insert into bdpf_system_experiment_time
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="minTime != null">
+        min_time,
+      </if>
+      <if test="maxTime != null">
+        max_time,
+      </if>
+      <if test="addTime != null">
+        add_time,
+      </if>
+      <if test="maxNumber != null">
+        max_number,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="minTime != null">
+        #{minTime,jdbcType=VARCHAR},
+      </if>
+      <if test="maxTime != null">
+        #{maxTime,jdbcType=VARCHAR},
+      </if>
+      <if test="addTime != null">
+        #{addTime,jdbcType=VARCHAR},
+      </if>
+      <if test="maxNumber != null">
+        #{maxNumber,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.xunfang.bdpf.system.time.entity.TimeExample" resultType="java.lang.Long">
+    select count(*) from bdpf_system_experiment_time
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update bdpf_system_experiment_time
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.minTime != null">
+        min_time = #{record.minTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.maxTime != null">
+        max_time = #{record.maxTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addTime != null">
+        add_time = #{record.addTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.maxNumber != null">
+        max_number = #{record.maxNumber,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update bdpf_system_experiment_time
+    set id = #{record.id,jdbcType=VARCHAR},
+      min_time = #{record.minTime,jdbcType=VARCHAR},
+      max_time = #{record.maxTime,jdbcType=VARCHAR},
+      add_time = #{record.addTime,jdbcType=VARCHAR},
+      max_number = #{record.maxNumber,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xunfang.bdpf.system.time.entity.Time">
+    update bdpf_system_experiment_time
+    <set>
+      <if test="minTime != null">
+        min_time = #{minTime,jdbcType=VARCHAR},
+      </if>
+      <if test="maxTime != null">
+        max_time = #{maxTime,jdbcType=VARCHAR},
+      </if>
+      <if test="addTime != null">
+        add_time = #{addTime,jdbcType=VARCHAR},
+      </if>
+      <if test="maxNumber != null">
+        max_number = #{maxNumber,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xunfang.bdpf.system.time.entity.Time">
+    update bdpf_system_experiment_time
+    set min_time = #{minTime,jdbcType=VARCHAR},
+      max_time = #{maxTime,jdbcType=VARCHAR},
+      add_time = #{addTime,jdbcType=VARCHAR},
+      max_number = #{maxNumber,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

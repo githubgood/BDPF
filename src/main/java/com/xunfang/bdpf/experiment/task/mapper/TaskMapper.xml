@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xunfang.bdpf.experiment.task.mapper.TaskMapper">
+  <resultMap id="BaseResultMap" type="com.xunfang.bdpf.experiment.task.entity.Task">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="teaching_plan_id" jdbcType="VARCHAR" property="teachingPlanId" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, name, teaching_plan_id, description
+  </sql>
+  <select id="selectByExample" parameterType="com.xunfang.bdpf.experiment.task.entity.TaskExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from bdpf_experiment_course_task
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from bdpf_experiment_course_task
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from bdpf_experiment_course_task
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.xunfang.bdpf.experiment.task.entity.TaskExample">
+    delete from bdpf_experiment_course_task
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.xunfang.bdpf.experiment.task.entity.Task">
+    insert into bdpf_experiment_course_task (id, name, teaching_plan_id, 
+      description)
+    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{teachingPlanId,jdbcType=VARCHAR}, 
+      #{description,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xunfang.bdpf.experiment.task.entity.Task">
+    insert into bdpf_experiment_course_task
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="teachingPlanId != null">
+        teaching_plan_id,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="teachingPlanId != null">
+        #{teachingPlanId,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.xunfang.bdpf.experiment.task.entity.TaskExample" resultType="java.lang.Long">
+    select count(*) from bdpf_experiment_course_task
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update bdpf_experiment_course_task
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.teachingPlanId != null">
+        teaching_plan_id = #{record.teachingPlanId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.description != null">
+        description = #{record.description,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update bdpf_experiment_course_task
+    set id = #{record.id,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      teaching_plan_id = #{record.teachingPlanId,jdbcType=VARCHAR},
+      description = #{record.description,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xunfang.bdpf.experiment.task.entity.Task">
+    update bdpf_experiment_course_task
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="teachingPlanId != null">
+        teaching_plan_id = #{teachingPlanId,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xunfang.bdpf.experiment.task.entity.Task">
+    update bdpf_experiment_course_task
+    set name = #{name,jdbcType=VARCHAR},
+      teaching_plan_id = #{teachingPlanId,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  
+ <select id="queryTaskByPage" parameterType="Map" resultType="com.xunfang.bdpf.experiment.task.entity.Task">
+        select 
+         a.id as id,
+         a.name as name,
+         e.name as planName,
+         group_concat(distinct c.id) as classId,
+         group_concat(distinct c.name) as className,
+         (case  when ((sum(d.task_status)/COUNT(d.course_task_id))=0 )then 0
+               when ((sum(d.task_status)/COUNT(d.course_task_id)>0) and 1>(sum(d.task_status)/COUNT(d.course_task_id)) )then 1 
+                else 2 end ) as taskStatus
+          from bdpf_experiment_course_task a
+          left join  bdpf_experiment_class_task_line b
+          on a.id = b.course_task_id
+          left join bdpf_experiment_class c
+          on c.id = b.class_id
+          left join bdpf_experiment_grade d
+          on d.class_id = c.id and a.id=d.course_task_id
+          left join bdpf_experiment_teaching_plan e
+          on a.teaching_plan_id = e.id
+          left join bdpf_experiment_grade_resource g
+          on d.id = g.experiment_grade_id
+          where 1=1
+          <if test="account != null and account != ''">
+			and d.teacher_id = '${account}'
+		</if>
+		<if test="keywords != null and keywords != ''">
+			and a.name like '%${keywords}%'
+		</if>
+		group by a.id,a.name,e.name
+		order by a.name desc
+		limit ${skip},${limit}
+ </select>
+
+ <select id="queryTaskByClass" parameterType="Map" resultType="com.xunfang.bdpf.experiment.task.entity.Task">
+        select 
+         a.id as id,
+         a.name as name,
+         b.class_id as classId
+         from bdpf_experiment_course_task a
+         left join bdpf_experiment_class_task_line b
+         on a.id = b.course_task_id
+         where b.class_id = '${classId}'
+		group by a.id,a.name,b.class_id
+ </select>
+ 
+ <select id="getTaskCount" parameterType="Map" resultType="long">
+		select count(DISTINCT a.id)
+          from bdpf_experiment_course_task a
+          left join  bdpf_experiment_class_task_line b
+          on a.id = b.course_task_id
+          left join bdpf_experiment_class c
+          on c.id = b.class_id
+          left join bdpf_experiment_grade d
+          on d.class_id = c.id and a.id=d.course_task_id
+          left join bdpf_experiment_teaching_plan e
+          on a.teaching_plan_id = e.id
+          left join bdpf_experiment_grade_resource g
+          on d.id = g.experiment_grade_id
+          where 1=1
+          <if test="account != null and account != ''">
+			and d.teacher_id = '${account}'
+		</if>
+		<if test="keywords != null and keywords != ''">
+			and a.name like '%${keywords}%'
+		</if>
+ </select>  
+ 
+  <select id="queryDetailByPage" parameterType="Map" resultType="com.xunfang.bdpf.experiment.task.entity.Task">
+       select 
+         n.account as id,
+         n.name as name ,
+         m.title as title,
+         d.report_status as reportStatus,
+         d.task_status as taskStatus   
+         from bdpf_experiment_course_task a, bdpf_experiment_class_task_line b,
+              bdpf_experiment_grade d, bdpf_experiment_teaching_plan e,bdpf_experiment_grade_resource g,
+              bdpf_experiment_teaching_plan_line h,bdpf_experiment_course_resource m,bdpf_system_user n
+        where 0=0
+          and a.id = b.course_task_id
+          and d.class_id = b.class_id
+          and a.teaching_plan_id = e.id
+          and d.id = g.experiment_grade_id
+          and e.id=h.teaching_plan_id
+          and h.course_resource_id =m.id
+          and d.student_id = n.account
+          and a.id=d.course_task_id
+		<if test="id != null and id != ''">
+			and a.id =#{id}
+		</if>
+		<if test="classId != null and classId != ''">
+		  and b.class_id =#{classId}
+		</if>		
+          GROUP BY   n.account,n.name  ,m.title ,d.report_status , d.task_status 
+          order by m.xh desc
+		limit ${skip},${limit}
+ </select>
+  
+   <select id="getDetailCount" parameterType="Map" resultType="com.xunfang.bdpf.experiment.task.entity.Task">
+		select 
+         n.account as id,
+         n.name as name ,
+         m.title as title,
+         d.report_status as reportStatus,
+         d.task_status as taskStatus   
+         from bdpf_experiment_course_task a, bdpf_experiment_class_task_line b,
+              bdpf_experiment_grade d, bdpf_experiment_teaching_plan e,bdpf_experiment_grade_resource g,
+              bdpf_experiment_teaching_plan_line h,bdpf_experiment_course_resource m,bdpf_system_user n
+        where 0=0
+          and a.id = b.course_task_id
+          and d.class_id = b.class_id
+          and a.teaching_plan_id = e.id
+          and d.id = g.experiment_grade_id
+          and e.id=h.teaching_plan_id
+          and h.course_resource_id =m.id
+          and d.student_id = n.account
+          and a.id=d.course_task_id
+		<if test="id != null and id != ''">
+			and a.id =#{id}
+		</if>
+		<if test="classId != null and classId != ''">
+		  and b.class_id =#{classId}
+		</if>		
+          GROUP BY   n.account, n.name  ,m.title ,d.report_status , d.task_status
+ </select> 
+ 
+ <select id="selectTaskByAccount" parameterType="Map"  resultType="com.xunfang.bdpf.experiment.task.entity.Task">
+		select 
+		 a.id as id,
+		 a.name as name
+		from bdpf_experiment_course_task a,bdpf_experiment_class_task_line b,bdpf_system_user c
+        where a.id = b.course_task_id and find_in_set(b.class_id,c.class_id) 
+		<if test="account != null and account != ''">
+			and c.account = #{account}
+		</if>
+		group by a.id,a.name
+	</select>
+ 
+</mapper>

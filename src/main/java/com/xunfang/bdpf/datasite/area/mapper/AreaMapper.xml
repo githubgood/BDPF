@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xunfang.bdpf.datasite.area.mapper.AreaMapper">
+  <resultMap id="BaseResultMap" type="com.xunfang.bdpf.datasite.area.entity.Area">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="data_site_id" jdbcType="VARCHAR" property="dataSiteId" />
+    <result column="abstract" jdbcType="VARCHAR" property="areAbstract" />
+    <result column="keyword" jdbcType="VARCHAR" property="keyword" />
+    <result column="data_provider_employer" jdbcType="VARCHAR" property="dataProviderEmployer" />
+    <result column="update_date" jdbcType="VARCHAR" property="updateDate" />
+    <result column="release_date" jdbcType="VARCHAR" property="releaseDate" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, data_site_id, abstract, keyword, data_provider_employer, update_date, release_date,title
+  </sql>
+  
+  <select id="selectAreaByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    bdpf_data_area.id as id,
+    bdpf_data_area.data_site_id as data_site_id,
+    bdpf_data_area.abstract as abstract,
+    bdpf_data_area.keyword as keyword,
+    bdpf_data_area.data_provider_employer as data_provider_employer,
+    bdpf_data_area.update_date as update_date,
+    bdpf_data_area.release_date as release_date,
+    bdpf_data_area.title as title,
+    bdpf_data_site.name as name
+    from bdpf_data_area,bdpf_data_site
+    where bdpf_data_area.data_site_id=bdpf_data_site.id 
+    <if test="id != null and id != ''">
+        and bdpf_data_area.data_site_id = #{id,jdbcType=VARCHAR}
+      </if>
+    <if test="keywords != null and keywords != ''">
+			and bdpf_data_area.title like '%${keywords}%'
+	</if>
+	<if test="type != null and type != ''">
+        and bdpf_data_area.type = #{type,jdbcType=VARCHAR}
+      </if>
+	order by bdpf_data_area.update_date desc
+	limit ${skip},${limit}
+  </select>
+  
+   <select id="selectAreaById" parameterType="java.lang.String" resultMap="BaseResultMap">
+   select 
+    bdpf_data_area.id as id,
+    bdpf_data_area.data_site_id as data_site_id,
+    bdpf_data_area.abstract as abstract,
+    bdpf_data_area.keyword as keyword,
+    bdpf_data_area.data_provider_employer as data_provider_employer,
+    bdpf_data_area.update_date as update_date,
+    bdpf_data_area.release_date as release_date,
+    bdpf_data_area.title as title,
+    bdpf_data_site.name as name
+    from bdpf_data_area,bdpf_data_site
+    where bdpf_data_area.id = #{id,jdbcType=VARCHAR} and bdpf_data_area.data_site_id=bdpf_data_site.id
+    <if test="type != null and type != ''">
+        and bdpf_data_area.type = #{type,jdbcType=VARCHAR}
+      </if>
+    </select>
+    
+    <select id="selectAreaBySiteId" parameterType="java.lang.String" resultMap="BaseResultMap">
+   select 
+    bdpf_data_area.id as id,
+    bdpf_data_area.data_site_id as data_site_id,
+    bdpf_data_area.abstract as abstract,
+    bdpf_data_area.keyword as keyword,
+    bdpf_data_area.data_provider_employer as data_provider_employer,
+    bdpf_data_area.update_date as update_date,
+    bdpf_data_area.release_date as release_date,
+    bdpf_data_area.title as title
+    from bdpf_data_area
+    where bdpf_data_area.data_site_id = #{id,jdbcType=VARCHAR}
+    </select>
+  
+   <select id="selectAreaByTitle" parameterType="java.lang.String" resultMap="BaseResultMap">
+   select 
+    bdpf_data_area.id as id,
+    bdpf_data_area.data_site_id as data_site_id,
+    bdpf_data_area.abstract as abstract,
+    bdpf_data_area.keyword as keyword,
+    bdpf_data_area.data_provider_employer as data_provider_employer,
+    bdpf_data_area.update_date as update_date,
+    bdpf_data_area.release_date as release_date,
+    bdpf_data_area.title as title
+    from bdpf_data_area
+    where 0=0
+     <if test="title != null and title != ''">
+        and bdpf_data_area.title = #{title,jdbcType=VARCHAR}
+     </if>
+    <if test="type != null and type != ''">
+	    and bdpf_data_area.type = #{type,jdbcType=VARCHAR}
+	</if>
+    </select>
+  
+  <delete id="deleteAreaByPrimaryKey" parameterType="java.lang.String">
+    delete from bdpf_data_area
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  
+  <delete id="deleteAreaBySiteId" parameterType="java.lang.String">
+    delete from bdpf_data_area
+    where data_site_id = #{id,jdbcType=VARCHAR}
+  </delete>
+  
+  <select id="getAreaCount" parameterType="Map" resultType="long">
+		select count(id)
+		from bdpf_data_area
+		where 0 = 0
+		<if test="id != null and id != ''">
+        and data_site_id = #{id,jdbcType=VARCHAR}
+        </if>
+		<if test="keywords != null and keywords != ''">
+			and title like '%${keywords}%'
+		</if>
+		 <if test="type != null and type != ''">
+        and type = #{type,jdbcType=VARCHAR}
+      </if>
+	</select>
+  
+ 
+  <insert id="insertArea" useGeneratedKeys="true" keyProperty="id" parameterType="com.xunfang.bdpf.datasite.area.entity.Area">
+    insert into bdpf_data_area (id, title,data_site_id, abstract, 
+      keyword, data_provider_employer, update_date, 
+      release_date,type)
+    values (#{id,jdbcType=VARCHAR},#{title,jdbcType=VARCHAR}, #{dataSiteId,jdbcType=VARCHAR}, #{areAbstract,jdbcType=VARCHAR}, 
+      #{keyword,jdbcType=VARCHAR}, #{dataProviderEmployer,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP}, 
+      #{releaseDate,jdbcType=TIMESTAMP},#{type,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xunfang.bdpf.datasite.area.entity.Area">
+    insert into bdpf_data_area
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="dataSiteId != null">
+        data_site_id,
+      </if>
+      <if test="abstract != null">
+        abstract,
+      </if>
+      <if test="keyword != null">
+        keyword,
+      </if>
+      <if test="dataProviderEmployer != null">
+        data_provider_employer,
+      </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
+      <if test="releaseDate != null">
+        release_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="dataSiteId != null">
+        #{dataSiteId,jdbcType=VARCHAR},
+      </if>
+      <if test="abstract != null">
+        #{abstract,jdbcType=VARCHAR},
+      </if>
+      <if test="keyword != null">
+        #{keyword,jdbcType=VARCHAR},
+      </if>
+      <if test="dataProviderEmployer != null">
+        #{dataProviderEmployer,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="releaseDate != null">
+        #{releaseDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateArea" parameterType="map">
+    update bdpf_data_area
+    <set>
+    <if test="record.dataSiteId != null and record.dataSiteId != ''">
+        data_site_id = #{record.dataSiteId,jdbcType=VARCHAR},
+      </if>
+       <if test="record.title != null and record.title != ''">
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.areAbstract != null and record.areAbstract != ''">
+        abstract = #{record.areAbstract,jdbcType=VARCHAR},
+      </if>
+      <if test="record.keyword != null and record.keyword != ''">
+        keyword = #{record.keyword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dataProviderEmployer != null and record.dataProviderEmployer != ''">
+        data_provider_employer = #{record.dataProviderEmployer,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateDate != null and record.updateDate != ''">
+        update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      </if>
+      </set>
+     where 0=0
+     <if test="record.id != null">
+     and  id = #{record.id,jdbcType=VARCHAR}
+     </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update bdpf_data_area
+    set id = #{record.id,jdbcType=VARCHAR},
+      data_site_id = #{record.dataSiteId,jdbcType=VARCHAR},
+      abstract = #{record.abstract,jdbcType=VARCHAR},
+      keyword = #{record.keyword,jdbcType=VARCHAR},
+      data_provider_employer = #{record.dataProviderEmployer,jdbcType=VARCHAR},
+      update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      release_date = #{record.releaseDate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xunfang.bdpf.datasite.area.entity.Area">
+    update bdpf_data_area
+    <set>
+      <if test="dataSiteId != null">
+        data_site_id = #{dataSiteId,jdbcType=VARCHAR},
+      </if>
+      <if test="abstract != null">
+        abstract = #{abstract,jdbcType=VARCHAR},
+      </if>
+      <if test="keyword != null">
+        keyword = #{keyword,jdbcType=VARCHAR},
+      </if>
+      <if test="dataProviderEmployer != null">
+        data_provider_employer = #{dataProviderEmployer,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null">
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="releaseDate != null">
+        release_date = #{releaseDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xunfang.bdpf.datasite.area.entity.Area">
+    update bdpf_data_area
+    set data_site_id = #{dataSiteId,jdbcType=VARCHAR},
+      abstract = #{abstract,jdbcType=VARCHAR},
+      keyword = #{keyword,jdbcType=VARCHAR},
+      data_provider_employer = #{dataProviderEmployer,jdbcType=VARCHAR},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      release_date = #{releaseDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+
+	<!-- 自动扫描且只扫描@Controller -->
+	<context:component-scan base-package="com.xunfang.bdpf.**.controller" use-default-filters="false">
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+	</context:component-scan>
+	<!-- 相当于注册了DefaultAnnotationHandlerMapping和AnnotationMethodHandlerAdapter两个bean
+	       1.即解决了@Controller注解的使用前提配置
+	       2.解决静态资源访问的问题
+	 -->
+	<mvc:annotation-driven/>
+	<!-- 指定可访问得静态资源 -->
+	<mvc:resources mapping="/common/**" location="/common/" />
+	<mvc:resources mapping="/resources/js/**" location="/resources/js/" />
+	<mvc:resources mapping="/resources/images/**" location="/resources/images/" />
+	<mvc:resources mapping="/resources/images/assembly/**" location="/resources/images/assembly/" />
+	<mvc:resources mapping="/resources/css/**" location="/resources/css/" />
+	<mvc:resources mapping="/resources/assembly/css/**" location="/resources/assembly/css/" />
+	<mvc:resources mapping="/resources/data/**" location="/resources/data/" />
+	<mvc:resources mapping="/resources/uploadFiles/**" location="/resources/uploadFiles/" />
+	<!-- 将无法mapping到Controller的path交给default servlet handler处理 -->
+	<!-- <bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping"></bean> -->
+	<!-- <mvc:default-servlet-handler/> -->
+	
+	<!-- 自定义拦截路径 -->
+	<mvc:interceptors>
+
+		<mvc:interceptor>
+			<mvc:mapping path="/*"/>
+			<mvc:mapping path="/*/*"/>
+			<mvc:mapping path="/*/*/*"/>
+	    	<bean class="com.xunfang.security.LoginInterceptor">
+	    	<property name="entry" value="/login" />
+			<property name="uriPatterns">
+				<array value-type="java.lang.String">
+					<value>/login</value>
+					<value>/login/loginout</value>
+					<value>/resources</value>
+					<value>/common</value>
+				</array>
+			</property>
+			</bean>
+		</mvc:interceptor>
+    </mvc:interceptors>
+    
+    <!-- 定义上传文件和写入内存的最大字节数 -->
+	<bean id="multipartResolver"
+    class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+	    <property name="maxUploadSize" value="1024000000"/>
+	    <property name="maxInMemorySize" value="102400000" />
+	</bean>
+		
+		<!-- 定义JSP文件的位置 -->  
+		<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+			<property name="prefix" value="/WEB-INF/views/"/>
+			<property name="suffix" value=".jsp"/>
+		</bean>
+
+</beans>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xunfang.bdpf.vmstemplates.virtual.mapper.SystemVirtualMapper">
+  <resultMap id="BaseResultMap" type="com.xunfang.bdpf.vmstemplates.virtual.entity.SystemVirtual">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="master" jdbcType="VARCHAR" property="master" />
+    <result column="slave" jdbcType="VARCHAR" property="slave" />
+    <result column="mid" jdbcType="VARCHAR" property="mid" />
+    <result column="sid" jdbcType="VARCHAR" property="sid" />
+    <result column="install" jdbcType="VARCHAR" property="install" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, user_id, master, slave,mid,sid,install
+  </sql>
+   <select id="selectSystemVirtualByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from bdpf_system_virtual
+    where user_id = #{userId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteSystemVirtualByPrimaryKey" parameterType="java.lang.String">
+    delete from bdpf_system_virtual
+    where user_id = #{user_id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteSystemVirtualByVirtualId" parameterType="java.lang.String">
+    delete from bdpf_system_virtual
+    where mid = #{id,jdbcType=VARCHAR} or sid like '%${id}%'
+  </delete>
+  <insert id="insertSystemVirtual" parameterType="com.xunfang.bdpf.vmstemplates.virtual.entity.SystemVirtual">
+    insert into bdpf_system_virtual (id, user_id, master, 
+      slave,mid,sid)
+    values (#{id,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{master,jdbcType=VARCHAR}, 
+      #{slave,jdbcType=VARCHAR},#{mid,jdbcType=VARCHAR},#{sid,jdbcType=VARCHAR})
+  </insert>
+   <update id="updateSystemVirtual" parameterType="map">
+    update bdpf_system_virtual set install = #{install,jdbcType=VARCHAR}
+    where user_id = #{userId,jdbcType=VARCHAR}
+    </update>
+ </mapper>

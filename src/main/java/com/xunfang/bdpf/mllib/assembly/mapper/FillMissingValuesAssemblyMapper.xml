@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xunfang.bdpf.mllib.assembly.mapper.FillMissingValuesAssemblyMapper">
+  <resultMap id="BaseResultMap" type="com.xunfang.bdpf.mllib.assembly.entity.FillMissingValuesAssembly">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="bdpf_mllib_assembly_id" jdbcType="VARCHAR" property="bdpfMllibAssemblyId" />
+    <result column="origin_value" jdbcType="VARCHAR" property="originValue" />
+    <result column="replace_value" jdbcType="VARCHAR" property="replaceValue" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, bdpf_mllib_assembly_id, origin_value, replace_value
+  </sql>
+  <select id="selectByExample" parameterType="com.xunfang.bdpf.mllib.assembly.entity.FillMissingValuesAssemblyExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from bdpf_mllib_assembly_fill_missing_values
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from bdpf_mllib_assembly_fill_missing_values
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from bdpf_mllib_assembly_fill_missing_values
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.xunfang.bdpf.mllib.assembly.entity.FillMissingValuesAssemblyExample">
+    delete from bdpf_mllib_assembly_fill_missing_values
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.xunfang.bdpf.mllib.assembly.entity.FillMissingValuesAssembly">
+    insert into bdpf_mllib_assembly_fill_missing_values (id, bdpf_mllib_assembly_id, origin_value, 
+      replace_value)
+    values (#{id,jdbcType=VARCHAR}, #{bdpfMllibAssemblyId,jdbcType=VARCHAR}, #{originValue,jdbcType=VARCHAR}, 
+      #{replaceValue,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xunfang.bdpf.mllib.assembly.entity.FillMissingValuesAssembly">
+    insert into bdpf_mllib_assembly_fill_missing_values
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="bdpfMllibAssemblyId != null">
+        bdpf_mllib_assembly_id,
+      </if>
+      <if test="originValue != null">
+        origin_value,
+      </if>
+      <if test="replaceValue != null">
+        replace_value,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="bdpfMllibAssemblyId != null">
+        #{bdpfMllibAssemblyId,jdbcType=VARCHAR},
+      </if>
+      <if test="originValue != null">
+        #{originValue,jdbcType=VARCHAR},
+      </if>
+      <if test="replaceValue != null">
+        #{replaceValue,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.xunfang.bdpf.mllib.assembly.entity.FillMissingValuesAssemblyExample" resultType="java.lang.Long">
+    select count(*) from bdpf_mllib_assembly_fill_missing_values
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update bdpf_mllib_assembly_fill_missing_values
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bdpfMllibAssemblyId != null">
+        bdpf_mllib_assembly_id = #{record.bdpfMllibAssemblyId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.originValue != null">
+        origin_value = #{record.originValue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.replaceValue != null">
+        replace_value = #{record.replaceValue,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update bdpf_mllib_assembly_fill_missing_values
+    set id = #{record.id,jdbcType=VARCHAR},
+      bdpf_mllib_assembly_id = #{record.bdpfMllibAssemblyId,jdbcType=VARCHAR},
+      origin_value = #{record.originValue,jdbcType=VARCHAR},
+      replace_value = #{record.replaceValue,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xunfang.bdpf.mllib.assembly.entity.FillMissingValuesAssembly">
+    update bdpf_mllib_assembly_fill_missing_values
+    <set>
+      <if test="bdpfMllibAssemblyId != null">
+        bdpf_mllib_assembly_id = #{bdpfMllibAssemblyId,jdbcType=VARCHAR},
+      </if>
+      <if test="originValue != null">
+        origin_value = #{originValue,jdbcType=VARCHAR},
+      </if>
+      <if test="replaceValue != null">
+        replace_value = #{replaceValue,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xunfang.bdpf.mllib.assembly.entity.FillMissingValuesAssembly">
+    update bdpf_mllib_assembly_fill_missing_values
+    set bdpf_mllib_assembly_id = #{bdpfMllibAssemblyId,jdbcType=VARCHAR},
+      origin_value = #{originValue,jdbcType=VARCHAR},
+      replace_value = #{replaceValue,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+</mapper>

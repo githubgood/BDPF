@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xunfang.bdpf.experiment.plan.mapper.PlanLineMapper">
+  <resultMap id="BaseResultMap" type="com.xunfang.bdpf.experiment.plan.entity.PlanLine">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="teaching_plan_id" jdbcType="VARCHAR" property="teachingPlanId" />
+    <result column="course_resource_id" jdbcType="VARCHAR" property="courseResourceId" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, teaching_plan_id, course_resource_id
+  </sql>
+  <select id="selectByExample" parameterType="com.xunfang.bdpf.experiment.plan.entity.PlanLineExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from bdpf_experiment_teaching_plan_line
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from bdpf_experiment_teaching_plan_line
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from bdpf_experiment_teaching_plan_line
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.xunfang.bdpf.experiment.plan.entity.PlanLineExample">
+    delete from bdpf_experiment_teaching_plan_line
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.xunfang.bdpf.experiment.plan.entity.PlanLine">
+    insert into bdpf_experiment_teaching_plan_line (id, teaching_plan_id, course_resource_id
+      )
+    values (#{id,jdbcType=VARCHAR}, #{teachingPlanId,jdbcType=VARCHAR}, #{courseResourceId,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.xunfang.bdpf.experiment.plan.entity.PlanLine">
+    insert into bdpf_experiment_teaching_plan_line
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="teachingPlanId != null">
+        teaching_plan_id,
+      </if>
+      <if test="courseResourceId != null">
+        course_resource_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="teachingPlanId != null">
+        #{teachingPlanId,jdbcType=VARCHAR},
+      </if>
+      <if test="courseResourceId != null">
+        #{courseResourceId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.xunfang.bdpf.experiment.plan.entity.PlanLineExample" resultType="java.lang.Long">
+    select count(*) from bdpf_experiment_teaching_plan_line
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update bdpf_experiment_teaching_plan_line
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.teachingPlanId != null">
+        teaching_plan_id = #{record.teachingPlanId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.courseResourceId != null">
+        course_resource_id = #{record.courseResourceId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update bdpf_experiment_teaching_plan_line
+    set id = #{record.id,jdbcType=VARCHAR},
+      teaching_plan_id = #{record.teachingPlanId,jdbcType=VARCHAR},
+      course_resource_id = #{record.courseResourceId,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xunfang.bdpf.experiment.plan.entity.PlanLine">
+    update bdpf_experiment_teaching_plan_line
+    <set>
+      <if test="teachingPlanId != null">
+        teaching_plan_id = #{teachingPlanId,jdbcType=VARCHAR},
+      </if>
+      <if test="courseResourceId != null">
+        course_resource_id = #{courseResourceId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xunfang.bdpf.experiment.plan.entity.PlanLine">
+    update bdpf_experiment_teaching_plan_line
+    set teaching_plan_id = #{teachingPlanId,jdbcType=VARCHAR},
+      course_resource_id = #{courseResourceId,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+	<insert id="batchInsert" parameterType="java.util.List">
+		insert into bdpf_experiment_teaching_plan_line (id,
+		teaching_plan_id,course_resource_id)
+		values
+		<foreach collection="list" index="index" item="item" separator=",">
+			( #{item.id}, #{item.teachingPlanId}, #{item.courseResourceId} )
+		</foreach>
+	</insert>
+<!--  
+	<delete id="deleteByPlanId" parameterType="list">
+		delete from bdpf_experiment_teaching_plan_line
+		where teaching_plan_id
+		in
+		<foreach close=")" collection="list" index="index" item="item" open="(" separator=",">
+			#{item}
+		</foreach>
+	</delete>
+-->	
+	<select id="queryPlanLineById" parameterType="Map" resultType="com.xunfang.bdpf.experiment.plan.entity.PlanLine">
+		select
+		planLine.course_resource_id as courseResourceId,
+		course.title as title,
+		course.course_resource_type as courseResourceType,
+		course.course_mirror_id as teachingPlanId
+		from
+		bdpf_experiment_teaching_plan_line planLine,bdpf_experiment_course_resource course
+		where 0=0
+        and planLine.course_resource_id=course.id
+		<if test="courseResourceId != null and courseResourceId != ''">
+			and planLine.course_resource_id = #{courseResourceId}
+		</if>
+		<if test="teachingPlanId != null and teachingPlanId != ''">
+			and planLine.teaching_plan_id= #{teachingPlanId}
+		</if>
+	</select>	
+</mapper>

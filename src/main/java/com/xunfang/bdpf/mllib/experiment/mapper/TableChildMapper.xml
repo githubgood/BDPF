@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xunfang.bdpf.mllib.experiment.mapper.TableChildMapper">
+  <resultMap id="BaseResultMap" type="com.xunfang.bdpf.mllib.experiment.entity.TableChild">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="bdpf_mllib_create_id" jdbcType="VARCHAR" property="bdpfMllibCreateId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="length" jdbcType="INTEGER" property="length" />
+    <result column="xh" jdbcType="INTEGER" property="xh" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, bdpf_mllib_create_id, name, type, length, xh
+  </sql>
+  <select id="selectByExample" parameterType="com.xunfang.bdpf.mllib.experiment.entity.TableChildExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from bdpf_mllib_table_child
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from bdpf_mllib_table_child
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from bdpf_mllib_table_child
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.xunfang.bdpf.mllib.experiment.entity.TableChildExample">
+    delete from bdpf_mllib_table_child
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.xunfang.bdpf.mllib.experiment.entity.TableChild">
+    insert into bdpf_mllib_table_child (id, bdpf_mllib_create_id, name, 
+      type, length, xh)
+    values (#{id,jdbcType=VARCHAR}, #{bdpfMllibCreateId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{type,jdbcType=VARCHAR}, #{length,jdbcType=INTEGER}, #{xh,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xunfang.bdpf.mllib.experiment.entity.TableChild">
+    insert into bdpf_mllib_table_child
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="bdpfMllibCreateId != null">
+        bdpf_mllib_create_id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="length != null">
+        length,
+      </if>
+      <if test="xh != null">
+        xh,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="bdpfMllibCreateId != null">
+        #{bdpfMllibCreateId,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="length != null">
+        #{length,jdbcType=INTEGER},
+      </if>
+      <if test="xh != null">
+        #{xh,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.xunfang.bdpf.mllib.experiment.entity.TableChildExample" resultType="java.lang.Long">
+    select count(*) from bdpf_mllib_table_child
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update bdpf_mllib_table_child
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bdpfMllibCreateId != null">
+        bdpf_mllib_create_id = #{record.bdpfMllibCreateId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null">
+        type = #{record.type,jdbcType=VARCHAR},
+      </if>
+      <if test="record.length != null">
+        length = #{record.length,jdbcType=INTEGER},
+      </if>
+      <if test="record.xh != null">
+        xh = #{record.xh,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update bdpf_mllib_table_child
+    set id = #{record.id,jdbcType=VARCHAR},
+      bdpf_mllib_create_id = #{record.bdpfMllibCreateId,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      type = #{record.type,jdbcType=VARCHAR},
+      length = #{record.length,jdbcType=INTEGER},
+      xh = #{record.xh,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xunfang.bdpf.mllib.experiment.entity.TableChild">
+    update bdpf_mllib_table_child
+    <set>
+      <if test="bdpfMllibCreateId != null">
+        bdpf_mllib_create_id = #{bdpfMllibCreateId,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="length != null">
+        length = #{length,jdbcType=INTEGER},
+      </if>
+      <if test="xh != null">
+        xh = #{xh,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xunfang.bdpf.mllib.experiment.entity.TableChild">
+    update bdpf_mllib_table_child
+    set bdpf_mllib_create_id = #{bdpfMllibCreateId,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      length = #{length,jdbcType=INTEGER},
+      xh = #{xh,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="queryTableChild" parameterType="Map" resultMap="BaseResultMap">
+    select 
+    b.id as id,
+    b.bdpf_mllib_create_id as bdpfMllibCreateId, 
+    b.name as name, 
+    b.type as type, 
+    b.length as length,
+    b.xh as xh
+    from bdpf_mllib_table a,bdpf_mllib_table_child b 
+    where a.id = b.bdpf_mllib_create_id
+    <if test="name!=null and name!=''">
+    	and a.name like '%${name}%'
+    </if>
+    <if test="account!=null and account!=''">
+    	and (a.account = '${account}' or a.account is null)
+    </if>
+    order by b.xh
+  </select>
+</mapper>

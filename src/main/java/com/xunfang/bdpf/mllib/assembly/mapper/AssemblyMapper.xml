@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xunfang.bdpf.mllib.assembly.mapper.AssemblyMapper">
+  <resultMap id="BaseResultMap" type="com.xunfang.bdpf.mllib.assembly.entity.Assembly">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="bdpf_mllib_experiment_id" jdbcType="VARCHAR" property="bdpfMllibExperimentId" />
+    <result column="bdpf_mllib_assembly_library_id" jdbcType="VARCHAR" property="bdpfMllibAssemblyLibraryId" />
+    <result column="parent_id" jdbcType="VARCHAR" property="parentId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="account" jdbcType="VARCHAR" property="account" />
+    <result column="state" jdbcType="INTEGER" property="state" />
+    <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
+    <result column="xh" jdbcType="INTEGER" property="xh" />
+    <result column="is_assembly" jdbcType="INTEGER" property="isAssembly" />
+    <result column="mainArr" jdbcType="VARCHAR" property="mainarr" />
+    <result column="connects" jdbcType="VARCHAR" property="connects" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, bdpf_mllib_experiment_id, bdpf_mllib_assembly_library_id, parent_id, name, account, 
+    state, start_time, xh, is_assembly, mainArr, connects
+  </sql>
+  <select id="selectByExample" parameterType="com.xunfang.bdpf.mllib.assembly.entity.AssemblyExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from bdpf_mllib_assembly
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from bdpf_mllib_assembly
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from bdpf_mllib_assembly
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.xunfang.bdpf.mllib.assembly.entity.AssemblyExample">
+    delete from bdpf_mllib_assembly
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.xunfang.bdpf.mllib.assembly.entity.Assembly">
+    insert into bdpf_mllib_assembly (id, bdpf_mllib_experiment_id, bdpf_mllib_assembly_library_id, 
+      parent_id, name, account, 
+      state, start_time, xh, 
+      is_assembly, mainArr, connects
+      )
+    values (#{id,jdbcType=VARCHAR}, #{bdpfMllibExperimentId,jdbcType=VARCHAR}, #{bdpfMllibAssemblyLibraryId,jdbcType=VARCHAR}, 
+      #{parentId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{account,jdbcType=VARCHAR}, 
+      #{state,jdbcType=INTEGER}, #{startTime,jdbcType=TIMESTAMP}, #{xh,jdbcType=INTEGER}, 
+      #{isAssembly,jdbcType=INTEGER}, #{mainarr,jdbcType=VARCHAR}, #{connects,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.xunfang.bdpf.mllib.assembly.entity.Assembly">
+    insert into bdpf_mllib_assembly
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="bdpfMllibExperimentId != null">
+        bdpf_mllib_experiment_id,
+      </if>
+      <if test="bdpfMllibAssemblyLibraryId != null">
+        bdpf_mllib_assembly_library_id,
+      </if>
+      <if test="parentId != null">
+        parent_id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="account != null">
+        account,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+      <if test="startTime != null">
+        start_time,
+      </if>
+      <if test="xh != null">
+        xh,
+      </if>
+      <if test="isAssembly != null">
+        is_assembly,
+      </if>
+      <if test="mainarr != null">
+        mainArr,
+      </if>
+      <if test="connects != null">
+        connects,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="bdpfMllibExperimentId != null">
+        #{bdpfMllibExperimentId,jdbcType=VARCHAR},
+      </if>
+      <if test="bdpfMllibAssemblyLibraryId != null">
+        #{bdpfMllibAssemblyLibraryId,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null">
+        #{parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="account != null">
+        #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="startTime != null">
+        #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="xh != null">
+        #{xh,jdbcType=INTEGER},
+      </if>
+      <if test="isAssembly != null">
+        #{isAssembly,jdbcType=INTEGER},
+      </if>
+      <if test="mainarr != null">
+        #{mainarr,jdbcType=VARCHAR},
+      </if>
+      <if test="connects != null">
+        #{connects,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.xunfang.bdpf.mllib.assembly.entity.AssemblyExample" resultType="java.lang.Long">
+    select count(*) from bdpf_mllib_assembly
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update bdpf_mllib_assembly
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bdpfMllibExperimentId != null">
+        bdpf_mllib_experiment_id = #{record.bdpfMllibExperimentId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bdpfMllibAssemblyLibraryId != null">
+        bdpf_mllib_assembly_library_id = #{record.bdpfMllibAssemblyLibraryId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.parentId != null">
+        parent_id = #{record.parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.account != null">
+        account = #{record.account,jdbcType=VARCHAR},
+      </if>
+      <if test="record.state != null">
+        state = #{record.state,jdbcType=INTEGER},
+      </if>
+      <if test="record.startTime != null">
+        start_time = #{record.startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.xh != null">
+        xh = #{record.xh,jdbcType=INTEGER},
+      </if>
+      <if test="record.isAssembly != null">
+        is_assembly = #{record.isAssembly,jdbcType=INTEGER},
+      </if>
+      <if test="record.mainarr != null">
+        mainArr = #{record.mainarr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.connects != null">
+        connects = #{record.connects,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update bdpf_mllib_assembly
+    set id = #{record.id,jdbcType=VARCHAR},
+      bdpf_mllib_experiment_id = #{record.bdpfMllibExperimentId,jdbcType=VARCHAR},
+      bdpf_mllib_assembly_library_id = #{record.bdpfMllibAssemblyLibraryId,jdbcType=VARCHAR},
+      parent_id = #{record.parentId,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      account = #{record.account,jdbcType=VARCHAR},
+      state = #{record.state,jdbcType=INTEGER},
+      start_time = #{record.startTime,jdbcType=TIMESTAMP},
+      xh = #{record.xh,jdbcType=INTEGER},
+      is_assembly = #{record.isAssembly,jdbcType=INTEGER},
+      mainArr = #{record.mainarr,jdbcType=VARCHAR},
+      connects = #{record.connects,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xunfang.bdpf.mllib.assembly.entity.Assembly">
+    update bdpf_mllib_assembly
+    <set>
+      <if test="bdpfMllibExperimentId != null">
+        bdpf_mllib_experiment_id = #{bdpfMllibExperimentId,jdbcType=VARCHAR},
+      </if>
+      <if test="bdpfMllibAssemblyLibraryId != null">
+        bdpf_mllib_assembly_library_id = #{bdpfMllibAssemblyLibraryId,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null">
+        parent_id = #{parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="account != null">
+        account = #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="startTime != null">
+        start_time = #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="xh != null">
+        xh = #{xh,jdbcType=INTEGER},
+      </if>
+      <if test="isAssembly != null">
+        is_assembly = #{isAssembly,jdbcType=INTEGER},
+      </if>
+      <if test="mainarr != null">
+        mainArr = #{mainarr,jdbcType=VARCHAR},
+      </if>
+      <if test="connects != null">
+        connects = #{connects,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xunfang.bdpf.mllib.assembly.entity.Assembly">
+    update bdpf_mllib_assembly
+    set bdpf_mllib_experiment_id = #{bdpfMllibExperimentId,jdbcType=VARCHAR},
+      bdpf_mllib_assembly_library_id = #{bdpfMllibAssemblyLibraryId,jdbcType=VARCHAR},
+      parent_id = #{parentId,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      account = #{account,jdbcType=VARCHAR},
+      state = #{state,jdbcType=INTEGER},
+      start_time = #{startTime,jdbcType=TIMESTAMP},
+      xh = #{xh,jdbcType=INTEGER},
+      is_assembly = #{isAssembly,jdbcType=INTEGER},
+      mainArr = #{mainarr,jdbcType=VARCHAR},
+      connects = #{connects,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="queryMaxXh" resultType="int"  parameterType="java.lang.String">
+		select
+		(case when xh is null then 1 else max(xh)+1 end) as xh
+		from
+		bdpf_mllib_assembly
+		where xh is not null and  bdpf_mllib_experiment_id = #{expid,jdbcType=VARCHAR}
+  </select>
+  <select id="queryByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from bdpf_mllib_assembly 
+    where parent_id = (select parent_id from bdpf_mllib_assembly 
+    where id = #{id,jdbcType=VARCHAR} )
+  </select>
+</mapper>

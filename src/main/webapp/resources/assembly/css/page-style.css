@@ -1,0 +1,1716 @@
+@charset "utf-8";
+.dn {
+  display: none;
+}
+body,
+html {
+  width: 100%;
+  height: 100%;
+}
+.ui-select-text,
+body {
+  overflow: hidden;
+}
+/*----xf-pai-----*/
+.pai-bpmn,
+.pai-container,
+.pai-nav,
+.pai-side-left,
+.pai-side-right,
+.pai-workspace {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+}
+.pai-container {
+  position: absolute;
+  left: 0;
+  right: 0;
+}
+.pai-nav {
+  position: absolute;
+  left: 0;
+  z-index: 999;
+  width: 60px;
+  background-color: #182A3C;
+  text-align: center;
+}
+.pai-logo {
+  position: relative;
+  cursor: pointer;
+  height: 60px;
+  opacity: 1;
+}
+.pai-logo .pai-logo-icon {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -16.5px;
+  margin-top: -21px;
+  width: 33px;
+  height: 42px;
+  background: url(../../images/assembly/pai/logo.png) no-repeat;
+}
+.pai-workspace {
+  right: 0;
+  left: 60px;
+  background: #eee;
+  transition: all .2s ease;
+  -webkit-transform: translate(250px, 0);
+  -ms-transform: translate(250px, 0);
+  -o-transform: translate(250px, 0);
+  transform: translate(250px, 0);
+}
+.pai-nav-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.pai-nav-list li {
+  position: relative;
+  padding: 10px 0;
+  margin-top: 10px;
+  cursor: pointer;
+  color: #bebfc2;
+  transition: all .2s ease;
+}
+.pai-nav-list li:hover {
+  background-color: #394559;
+}
+.pai-nav-list li:hover .icon-home-1 {
+  background: url(../../images/assembly/pai/home-hover.png) no-repeat;
+}
+.pai-nav-list li:hover .icon-lib-24 {
+  background: url(../../images/assembly/pai/lab-hover.png) no-repeat;
+}
+.pai-nav-list li:hover .text {
+  color: #fff;
+}
+.pai-nav-list li:hover .icon-data-source-24 {
+  background: url(../../images/assembly/pai/data-hover.png) no-repeat;
+}
+.pai-nav-list li:hover .icon-component-24 {
+  background: url(../../images/assembly/pai/module-hover.png) no-repeat;
+}
+.pai-nav-list .icon {
+  display: block;
+  width: 24px ;
+  height: 24px ;
+  margin: 0 auto;
+}
+.pai-nav-list .icon-home-1 {
+  background: url(../../images/assembly/pai/home.png) no-repeat;
+}
+.pai-nav-list .text {
+  display: block;
+  font-size: 12px;
+  padding: 4px 0 2px;
+  line-height: 1;
+}
+.pai-nav-list .icon-lib-24 {
+  height: 25px;
+  width: 21px;
+  background: url(../../images/assembly/pai/lab.png);
+}
+.pai-nav-list .icon-data-source-24 {
+  width: 22px;
+  background: url(../../images/assembly/pai/data-icon.png) no-repeat;
+}
+.pai-nav-list .icon-component-24 {
+  width: 22px;
+  background: url(../../images/assembly/pai/module-icon.png) no-repeat;
+}
+.pai-nav-bottom {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+.pai-nav-bottom .icon-user-o-24 {
+  width: 22px ;
+  height: 22px;
+  background: url(../../images/assembly/pai/user-icon.png) no-repeat;
+}
+.pai-nav-bottom li:hover {
+  background: transparent;
+}
+.pai-nav-bottom li:hover .icon-user-o-24 {
+  background: url(../../images/assembly/pai/user-hover.png) no-repeat;
+}
+.pai-nav-bottom .pai-nav-exit {
+  margin-top: -15px;
+}
+.pai-nav-bottom .pai-nav-exit a {
+  color: #0c84f4;
+}
+.pai-side-left {
+  left: 0;
+  z-index: 9;
+  width: 250px;
+  background-color: #f7f8f8;
+  border-right: 1px solid #E7E7E7;
+  margin-left: -250px;
+}
+.pai-side-left .pai-toolbox-sec {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+.pai-bpmn {
+  left: 0;
+  right: 550px;
+  z-index: 8;
+  outline: 0;
+  overflow: hidden;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-transition: all .2s ease;
+  transition: all .2s ease;
+}
+.pai-side-right {
+  right: 250px;
+  z-index: 9;
+  width: 300px;
+  transition: all .2s ease;
+  border-left: 1px solid #d6e2ee;
+}
+.pai-side-right .full-fill.is-opened {
+  border-left: 1px solid #E7E7E7;
+  background-color: #F5F5F5;
+}
+.pai-side-right .full-fill {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  position: relative;
+  z-index: 9;
+}
+.pai-project-list {
+  position: relative;
+  padding: 12px 20px 12px 10px;
+}
+.pai-project-list .pai-search-icon {
+  position: absolute;
+  top: 15px;
+  width: 12px;
+  height: 12px ;
+  background: url(../../images/assembly/pai/search-icon.png) no-repeat;
+}
+.pai-project-list .pai-search-input {
+  padding-left: 20px;
+  background: transparent;
+  border: none;
+  width: 400px;
+}
+.pai-dt-list .pai-test-box {
+  padding: 10px 20px;
+  position: relative;
+  cursor: pointer;
+}
+.pai-dt-list .pai-test-box.active {
+  background-color: #dde2e6;
+}
+.pai-dt-list .pai-test-box .tree-node-expander {
+  position: absolute;
+  width: 10px;
+  height: 5px;
+  top: 15px;
+  left: 10px;
+  background: url(../../images/assembly/icon.png) no-repeat;
+  background-position: -189px -1px;
+}
+.pai-dt-list .pai-test-box .tree-node-expander.active {
+  top: 14px;
+  left: 15px;
+  width: 5px;
+  height: 10px;
+  background-position: -180px -1px;
+}
+.pai-dt-list .pai-test-box .tree-node-label-wrapper-branch {
+  position: relative;
+  padding: 0 0 0 30px;
+  float: left;
+}
+.pai-dt-list .pai-test-box .tree-node-icon {
+  position: absolute;
+  width: 12px;
+  height: 10px;
+  top: 3px;
+  left: 10px;
+}
+.pai-dt-list .pai-test-box .icon-star {
+  background: url(../../images/assembly/icon.png) no-repeat -1px -1px;
+}
+.pai-dt-list-box{
+  overflow: auto;
+  height: 100%;
+   padding-bottom: 50px;
+  margin-bottom:30px;
+}
+.pai-dt-list dt {
+  padding: 10px 0 10px 35px;
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+  font-weight: 400;
+}
+.pai-dt-list dt .tree-node-expander {
+  position: absolute;
+  width: 10px;
+  height: 5px;
+  top: 15px;
+  left: 10px;
+  margin-left: 20px;
+  background: url(../../images/assembly/icon.png) no-repeat -189px -1px;
+}
+.pai-dt-list dt .tree-node-expander.active {
+  top: 14px;
+  width: 5px;
+  height: 10px;
+  background-position: -180px -1px;
+}
+.pai-dt-list dt .tree-node-label-wrapper-branch {
+  padding: 0 0 0 36px;
+  float: left;
+  position: relative;
+}
+.pai-dt-list dt .tree-node-icon {
+  position: absolute;
+  width: 12px;
+  height: 10px;
+  top: 3px;
+  left: 15px;
+}
+.pai-dt-list dt .icon-folder {
+  background: url(../../images/assembly/icon.png) no-repeat -17px -1px;
+}
+.pai-dt-list dd {
+  padding: 6px 0;
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+}
+.pai-dt-list .pai-et-box {
+  padding: 6px 0;
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+}
+.pai-dt-list .pai-et-box:hover {
+  background-color: #ededed;
+}
+.pai-dt-list .pai-et-box .tree-node-indenter {
+  margin-left: 50px;
+}
+.pai-dt-list .pai-et-box .element-default {
+  position: relative;
+}
+.pai-dt-list .pai-et-box .element-text {
+  display: inline-block;
+  width: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  vertical-align: bottom;
+}
+.pai-dt-list .pai-et-box .pai-del {
+    position: relative;
+}
+.pai-dt-list .pai-et-box .tree-node-icon {
+  position: absolute;
+  width: 10px;
+  height: 12px;
+  top: 0px;
+  left: -15px;
+  background: url(../../images/assembly/icon.png) no-repeat -35px -1px;
+}
+.pai-dt-list .pai-et-box .icon-del-o {
+    position: absolute;
+    top: -10px;
+    left: 50px;
+    background: url(../../images/assembly/icon.png) no-repeat;
+    background-position: -22px -93px;
+    height: 14px;
+    width: 14px;
+}
+.pai-dt-list dd:hover {
+  background-color: #ededed;
+}
+.pai-dt-list dd .tree-node-indenter {
+  margin-left: 50px;
+}
+.pai-dt-list dd .element-default {
+  position: relative;
+}
+.pai-dt-list dd .element-text {
+  display: inline-block;
+  width: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  vertical-align: bottom;
+}
+.pai-dt-list dd .tree-node-icon {
+  position: absolute;
+  width: 10px;
+  height: 12px;
+  top: 0px;
+  left: -15px;
+  background: url(../../images/assembly/icon.png) no-repeat -35px -1px;
+}
+/*----project-region------*/
+.pai-bpmn-metadata {
+  z-index: 9;
+  height: 40px;
+  background-color: #f7f8f8;
+  border-bottom: 1px solid #d6e2ee;
+  line-height: 40px;
+}
+.pai-bpmn-metadata .pai-bpmn-left {
+  float: left;
+  padding: 0 10px;
+}
+.pai-bpmn-metadata .pai-bpmn-left .box {
+  display: inline-block;
+  border: 1px solid #f7f8f8;
+  height: 30px;
+  line-height: 30px;
+  color: #999;
+  margin-top: 5px;
+  padding: 0 7px;
+  border-radius: 2px;
+  -webkit-transition: border-color 0.2s;
+  -o-transition: border-color 0.2s;
+  transition: border-color 0.2s;
+}
+.pai-bpmn-metadata .pai-bpmn-left .box.is-opened .arrow-down {
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+.pai-bpmn-metadata .pai-bpmn-left .arrow-down {
+  display: inline-block;
+  margin-left: 7px;
+  width: 10px;
+  height: 5px;
+  background: url(../../images/assembly/icon.png) no-repeat -189px -1px;
+  vertical-align: middle;
+}
+.pai-bpmn-metadata .pai-bpmn-left .pai-dropdown {
+  position: absolute;
+  min-width: 300px;
+  width: 300px;
+  max-height: 360px;
+  overflow: hidden;
+  z-index: 9;
+  background-color: #FFF;
+  margin: 0;
+  padding: 4px 0;
+  opacity: .98;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+  border-radius: 0 0 2px 2px;
+}
+.pai-bpmn-metadata .pai-bpmn-left .pai-dropdown li {
+  position: relative;
+  line-height: 24px;
+  text-align: left;
+  padding: 0 28px;
+  color: #333;
+  margin-top: 1px;
+}
+.pai-bpmn-metadata .pai-bpmn-left .pai-dropdown li.selected,
+.pai-bpmn-metadata .pai-bpmn-left .pai-dropdown li:hover {
+  background-color: #E8F6FF;
+}
+.pai-bpmn-metadata .pai-bpmn-left .pai-dropdown li:hover .icon-close-l {
+  position: absolute;
+  right: 10px;
+  top: 6px;
+  width: 12px;
+  height: 12px;
+  background: url(../../images/assembly/icon.png) no-repeat;
+  background-position: -43px -93px;
+  cursor: pointer;
+}
+.pai-bpmn-metadata .pai-bpmn-left .pai-dropdown .icon {
+  display: inline-block;
+  width: 20px ;
+  height: 10px;
+}
+.pai-bpmn-metadata .pai-bpmn-left .pai-dropdown .i-checked {
+  background: url(../../images/assembly/icon.png) no-repeat;
+  background-position: -63px -93px;
+}
+.pai-bpmn-right {
+  float: right;
+  margin-top: 7px;
+  margin-right: 15px;
+}
+.pai-bpmn-right li {
+  position: relative;
+  display: inline-block;
+  width: 26px;
+  height: 26px ;
+}
+.pai-bpmn-right li:hover {
+  background-color: #ededed;
+}
+.pai-bpmn-right li:hover .icon-group {
+  background-position: -1px -72px;
+}
+.pai-bpmn-right li:hover .icon-zoom-in {
+  background-position: -21px -72px;
+}
+.pai-bpmn-right li:hover .icon-zoom-out {
+  background-position: -43px -72px;
+}
+.pai-bpmn-right li:hover .icon-real-size {
+  background-position: -64px -72px;
+}
+.pai-bpmn-right li:hover .icon-fitscreen {
+  background-position: -85px -72px;
+}
+.pai-bpmn-right li:hover .icon-fullscreen {
+  background-position: -109px -72px;
+}
+.pai-bpmn-right li:hover .icon-operation {
+  background-position: -130px -72px;
+}
+.pai-bpmn-right li:hover .icon-deploy {
+  background-position: -151px -72px;
+  width: 18px;
+}
+.pai-bpmn-right li:hover .icon-share {
+  background-position: -174px -72px;
+}
+.pai-bpmn-right li .icon {
+  margin: 7px;
+  color: #666;
+  display: inline-block;
+  background: url(../../images/assembly/icon.png) no-repeat;
+  position: absolute;
+  left: 50%;
+  margin-left: -8px;
+  top: 50%;
+  margin-top: -8px;
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+.pai-bpmn-right li .icon-group {
+  background-position: -1px -51px;
+}
+.pai-bpmn-right li .icon-zoom-in {
+  background-position: -21px -51px;
+}
+.pai-bpmn-right li .icon-zoom-out {
+  background-position: -43px -51px;
+}
+.pai-bpmn-right li .icon-real-size {
+  background-position: -64px -51px;
+}
+.pai-bpmn-right li .icon-fitscreen {
+  background-position: -85px -51px;
+}
+.pai-bpmn-right li .icon-fullscreen {
+  background-position: -109px -51px;
+}
+.pai-bpmn-right li.w_5 {
+  width: 5px;
+}
+.pai-bpmn-right li .pai-right-line {
+  position: absolute;
+  top: 5px;
+  left: 2px;
+  display: inline-block;
+  width: 1px ;
+  height: 16px;
+  background-color: #d6e2ee;
+}
+.pai-bpmn-right li .icon-operation {
+  background-position: -130px -51px;
+}
+.pai-bpmn-right li .icon-deploy {
+  background-position: -151px -51px;
+  width: 18px;
+}
+.pai-bpmn-right li .icon-share {
+  background-position: -174px -51px;
+}
+.pai-bpm-paper {
+  width: 100%;
+  height: 100%;
+  background-color: #f8fafb;
+  position: relative;
+  overflow: auto;
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+  user-select: none;
+}
+.pane-scroll {
+  height: 902px;
+  position: relative;
+  box-sizing: content-box;
+}
+.pane-node-content {
+  position: relative;
+  width: 180px;
+  height: 30px;
+  line-height: 30px;
+  background-color: #fff;
+  border: 1px solid #a0b7cd;
+  border-radius: 15px;
+  font-size: 12px;
+  -webkit-transition: background-color 0.2s;
+  transition: background-color 0.2s;
+}
+.pane-node-content .icon {
+  position: absolute;
+  left: 2px ;
+  top: 2px;
+  width: 26px ;
+  height: 26px;
+  background: url(../../images/assembly/icon.png) no-repeat;
+}
+.pane-node-content .icon-data {
+  background-position: -1px -20px;
+}
+.pane-node-content .icon-type {
+  background-position: -32px -20px;
+}
+.pane-node-content .icon-doc {
+  background-position: -63px -20px;
+}
+.pane-node-content .name {
+  display: inline-block;
+  margin-left: 35px;
+  width: 120px;
+  font-size: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.pane-node-content .status {
+  position: absolute;
+  right: 7px ;
+  top: 7px;
+  width: 16px ;
+  height: 16px;
+  background: url(../../images/assembly/icon.png) no-repeat;
+}
+.pane-node-content .icon-warn {
+  background-position: -146px -20px;
+}
+.pane-node-content .icon-close {
+  background-position: -125px -20px;
+}
+.pane-node-content .icon-success {
+  background-position: -167px -20px;
+}
+.pane-node-content .icon-loading {
+  background: url(../../images/assembly/module/loading_anim.gif) no-repeat;
+}
+.pai-btn-create {
+  position: absolute;
+  bottom: 0;
+  z-index: 9;
+  width: 100%;
+  height: 34px;
+  line-height: 34px;
+  font-size: 14px;
+  text-align: center;
+  cursor: pointer;
+  color: #182A3C;
+  background-color: #dde2e6;
+  -webkit-transition: background-color 0.2s ease;
+  -o-transition: background-color 0.2s ease;
+  transition: background-color 0.2s ease;
+  box-shadow: 0 0 16px -5px rgba(0, 0, 0, 0.2);
+  -webkit-user-select: none;
+  user-select: none;
+}
+.pai-btn-create .pai-create-et,
+.pai-btn-create .pai-del {
+  position: relative;
+}
+.pai-btn-create .pai-create-et {
+  margin-right: 30px;
+}
+.pai-btn-create .icon {
+  position: absolute;
+  top: 2px;
+  left: -18px;
+  width: 12px ;
+  height: 12px ;
+  background: url(../../images/assembly/icon.png) no-repeat;
+}
+.pai-btn-create .icon-plus-o {
+  background-position: -1px -93px;
+}
+.pai-btn-create .icon-del-o {
+  background-position: -22px -93px;
+  height: 14px;
+  width: 14px;
+}
+.pai-btn-create .text {
+  font-size: 12px;
+  color: #627799;
+}
+/*----/project-region------*/
+/*------right-content-----*/
+.pai-side-right {
+  background-color: #f7f8f8;
+}
+.dms-prop-wrap {
+  position: relative;
+  margin: 0;
+  display: -webkit-flex;
+  display: flex;
+  flex-direction: column;
+  user-select: none;
+  background: #f7f8f8;
+}
+.dms-prop-header {
+  text-align: center;
+  height: 40px;
+  line-height: 40px;
+  color: #8B8B8B;
+  -webkit-box-shadow: 0 0 16px -5px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 16px -5px rgba(0, 0, 0, 0.2);
+  -webkit-flex-shrink: 0;
+  flex-shrink: 0;
+}
+.dms-prop-tab {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  display: -webkit-flex;
+  display: flex;
+}
+.dms-prop-tab li.selected {
+  background-color: #f7f8f8;
+}
+.dms-prop-tab li {
+  -webkit-flex-grow: 1;
+  flex-grow: 1;
+  cursor: pointer;
+  background-color: #dde2e6;
+}
+.dms-prop-body {
+  padding: 30px;
+}
+.dms-prop-body .dms-prop-tooltip {
+  color: #999;
+}
+.dms-prop-body .form-group {
+  position: relative;
+}
+.dms-prop-body .form-group label {
+  font-weight: 400;
+  font-size: 12px;
+}
+.dms-prop-body .form-group .form-control {
+  height: 30px;
+}
+.dms-prop-body .form-group .icon {
+  position: absolute;
+  bottom: 7px;
+  right: 10px;
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+.dms-prop-body .form-group .form-close {
+  background: url(../../images/assembly/icon.png) no-repeat -81px -93px;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+.dms-prop-group {
+  position: relative;
+  margin: 0 -15px;
+}
+.dms-prop-item {
+  margin-bottom: 10px;
+}
+.grid-wrap {
+  overflow: auto;
+}
+.dms-prop-label {
+  height: 30px;
+  line-height: 30px;
+}
+.dms-prop-label label {
+  color: #666;
+  font-weight: 400;
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.dms-prop-label label {
+  color: #666;
+  font-weight: 400;
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.dms-prop-item-table .btn-refresh {
+  position: absolute;
+  top: -22px;
+  right: 1px;
+  cursor: pointer;
+  color: #289DE9;
+  opacity: .8;
+  -webkit-transition: opacity .2s;
+  -o-transition: opacity .2s;
+  transition: opacity .2s;
+}
+.dms-prop-item-table .grid-wrap {
+  position: relative;
+  overflow-x: auto;
+  border-radius: 2px;
+}
+.dms-prop-input .table-bordered {
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+  -webkit-box-shadow: 0 0 1px #CCC;
+  -moz-box-shadow: 0 0 1px #CCC;
+  box-shadow: 0 0 1px #CCC;
+  background-color: #FFF;
+  border: 1px solid #e6e6e6;
+}
+.dms-prop-input .table {
+  /* width: 350px;
+  min-width: 350px; */
+}
+.dms-prop-input .table > thead > tr > th {
+  line-height: 1.6;
+  color: #999;
+  font-weight: 400;
+  vertical-align: bottom;
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  border: 1px solid #e6e6e6;
+  padding-left: 10px;
+}
+.dms-prop-input .btn {
+  display: block;
+  width: 100%;
+  border-radius: 2px;
+  color: #333;
+  background-color: #f9f9f9;
+  border-color: #ccc;
+}
+.dms-prop-input .btn:hover {
+  background-color: #fff;
+}
+.btn {
+  display: inline-block;
+  margin-bottom: 0;
+  font-weight: 400;
+  text-align: center;
+  vertical-align: middle;
+  touch-action: manipulation;
+  cursor: pointer;
+  background-image: none;
+  border: 1px solid transparent;
+  white-space: nowrap;
+  padding: 4px 16px;
+  font-size: 12px;
+  line-height: 1.66666667;
+  border-radius: 2px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+/*------/right-content-----*/
+/*-----弹框----*/
+/*模态框居中*/
+.modal-dialog {
+  display: table-cell;
+  vertical-align: middle;
+}
+.modal-header {
+  padding: 13px 20px 9px 20px;
+  background-color: #edf0f3;
+  border-bottom-color: #dcdddd;
+}
+.modal-backdrop.in {
+  opacity: 0.2;
+}
+.modal-title {
+  font-size: 14px ;
+  color: #3c4551;
+}
+.modal-content {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  border: 1px solid #dcdddd;
+}
+.modal-form .form-group {
+  margin-bottom: 0;
+}
+.modal-form .form-control {
+  display: inline-block;
+}
+.modal-form .red {
+  color: #ff0000;
+  font-size: 20px;
+  margin-right: 4px;
+  vertical-align: -webkit-baseline-middle;
+}
+.modal-form label {
+  font-size: 12px;
+  color: #a3a3a3;
+  font-weight: 400;
+}
+.modal-form .pai-input-search {
+  position: absolute;
+  top: 7px;
+  right: 5px;
+  width: 16px;
+  height: 16px;
+  background: url(../../images/assembly/pai/search.png) no-repeat;
+}
+.modal-form input[type="text"] {
+  height: 30px;
+  font-size: 12px;
+}
+.modal .wrap {
+  -webkit-flex-grow: 1;
+  flex-grow: 1;
+  display: -webkit-flex;
+  display: flex;
+  overflow: auto;
+}
+.modal .left_wrap {
+  width: 50%;
+  margin-right: 10px;
+}
+.modal .wrap-header {
+  margin-bottom: 10px;
+  height: 25px;
+  line-height: 25px;
+  position: relative;
+}
+.ui-checkbox {
+  display: inline-block;
+  min-width: 25px;
+}
+.ui-checkbox input[type="checkbox"].checkBox {
+  position: absolute;
+  opacity: 0;
+}
+.ui-checkbox span.checkBox {
+  background: url(../../images/assembly/no-checked.png) no-repeat;
+  display: inline-block;
+  padding-left: 25px;
+  height: 18px;
+  line-height: 18px;
+  font-size: 12px;
+  color: #666;
+}
+.ui-checkbox input[type="checkbox"].checkBox:checked + .checkBox {
+  background: url(../../images/assembly/checked.png) no-repeat;
+}
+.ui-radiobox {
+  display: inline-block;
+  min-width: 25px;
+}
+.ui-radiobox input[type="radio"].radioBox {
+  position: absolute;
+  opacity: 0;
+}
+.ui-radiobox span.radioBox {
+  background: url(../../images/assembly/no-radio.png) no-repeat;
+  display: inline-block;
+  padding-left: 20px;
+  height: 18px;
+  line-height: 18px;
+  font-size: 12px;
+  color: #666;
+}
+.ui-radiobox input[type="radio"].radioBox:checked + .radioBox {
+  background: url(../../images/assembly/radio.png) no-repeat;
+}
+.wrap .left_wrap .wrap-content {
+  width: 100%;
+  height: 290px;
+  border: 1px solid #E6E6E6;
+  margin-bottom: 0;
+  border-bottom: none;
+  overflow: auto; 
+}
+.wrap .zero-accordion-item {
+  position:relative;
+  display: block;
+  padding: 5px 20px 0 20px;
+  list-style: none;
+  height: 30px;
+  border-bottom: 1px solid #E6E6E6;
+}
+.zero-accordion .zero-accordion-title.active {
+  background-color: #E3F4FF;
+}
+.zero-accordion .zero-accordion-title {
+  border-bottom: 1px solid #e6e6e6;
+  line-height: 30px;
+  padding: 0 10px;
+  cursor: pointer;
+  font-size: 12px;
+}
+.right_wrap {
+  width: 50%;
+}
+.right_wrap .selected-tab {
+  position: absolute;
+  right: 0;
+  top: 1px;
+}
+.right_wrap .selected-tab li {
+  list-style: none;
+  float: left;
+  cursor: pointer;
+  border: 1px solid #DDD;
+  border-radius: 2px;
+  margin-left: -1px;
+  padding: 5px 10px;
+  line-height: 1;
+}
+.right_wrap .selected-tab li.selected {
+  border-color: #289DE9;
+  background: #289DE9;
+  color: #FFF;
+}
+.right_wrap .wrap-content {
+  overflow: hidden;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  -webkit-flex-grow: 1;
+  flex-grow: 1;
+}
+.right_wrap .zero-accordion,
+.right_wrap .table-body {
+  height: 260px;
+  overflow-y: auto;
+}
+.right_wrap .table-header,
+.right_wrap .table-body {
+  padding-right: 6px;
+}
+.right_wrap .table-bordered {
+  border: 1px solid #e6e6e6;
+}
+.right_wrap .table {
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 0;
+}
+.right_wrap .table > thead > tr > th {
+  border-bottom: 0;
+}
+.right_wrap .table > thead > tr > th,
+.right_wrap .table > tbody > tr > td {
+  padding: 3px;
+  line-height: 1.6;
+  color: #999;
+  font-weight: 400;
+  vertical-align: bottom;
+  font-size: 12px;
+}
+.right_wrap .table > thead > tr > th:nth-child(2),
+.right_wrap .table > tbody > tr > td:nth-child(2) {
+  width: 60%;
+}
+.right_wrap .table > thead > tr > th:first-child,
+.right_wrap .table > tbody > tr > td:first-child {
+  width: 36px;
+  position: relative;
+}
+.right_wrap .table .icon {
+  position: absolute;
+  left: 10px;
+  top: 5px;
+  cursor: pointer;
+  color: #999;
+  width: 16px;
+  height: 16px ;
+  background: url(../../images/assembly/icon.png) no-repeat;
+}
+.right_wrap .table .icon-delete {
+  background-position: -102px -93px;
+}
+.right_wrap .table .icon-delete:hover {
+  background-position: -119px -93px;
+}
+.selected-raw .txtRaw {
+  display: block;
+  width: 100%;
+  height: 290px;
+  padding: 4px 10px;
+  font-size: 12px;
+  line-height: 1.66666667;
+  color: #555;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+}
+/*参数设置*/
+.dms-prop-item-r-dataset ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  background-color: #FFF;
+  border: 1px solid #CCC;
+  border-radius: 2px;
+  user-select: none;
+}
+.dms-prop-item-r-dataset li {
+  border-bottom: 1px solid #CCC;
+  padding: 3px 5px;
+  color: #999;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.dms-prop-item-r-dataset li span {
+  color: #333;
+}
+.dms-prop-item-r-dataset li em {
+  padding-left: 10px;
+  font-style: normal;
+}
+.dms-prop-item-r-dataset li:last-child {
+  border-bottom: 0 none;
+}
+.dms-prop-item .dms-prop-text textarea {
+  width: 100%;
+  border: 1px solid #CCC;
+  border-radius: 2px;
+}
+.dms-target-list {
+  bottom: 6px;
+  background: url(../../images/assembly/icon.png) no-repeat -136px -93px;
+}
+.form-control {
+  padding: 2px 12px;
+  font-size: 12px;
+}
+/*实验属性*/
+.dms-describe-box {
+  width: 100%;
+  height: 50px;
+  border: 1px solid #ccc;
+}
+/*左侧菜单右键设置*/
+.ui-context-menu-layer,
+.ui-workarea-menu-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: transparent;
+  z-index: 9999;
+  display: block;
+}
+.ui-context-menu-layer .ui-context-menu,
+.ui-workarea-menu-layer .ui-context-menu {
+  margin: 0;
+  padding: 5px 0;
+  min-width: 200px;
+  position: absolute;
+  list-style: none;
+  background-color: rgba(255, 255, 255, 0.98);
+  border: 1px solid #eee;
+  -webkit-box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.1);
+  box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.1);
+  border-radius: 2px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.ui-context-menu-layer .ui-context-menu-item,
+.ui-workarea-menu-layer .ui-context-menu-item {
+  position: relative;
+  font-size: 12px;
+  color: #333;
+  height: 26px;
+  line-height: 26px;
+  padding-left: 30px;
+  padding-right: 10px;
+  cursor: pointer;
+  -webkit-transition: background-color 0.1s ease;
+  -o-transition: background-color 0.1s ease;
+  transition: background-color 0.1s ease;
+}
+.ui-context-menu-layer .ui-context-menu-item .icon,
+.ui-workarea-menu-layer .ui-context-menu-item .icon {
+  position: absolute;
+  top: 4px;
+  left: 8px;
+  width: 16px;
+  height: 16px;
+  background: url(../../images/assembly/icon.png) no-repeat;
+}
+.ui-context-menu-layer .ui-context-menu-item.separator,
+.ui-workarea-menu-layer .ui-context-menu-item.separator {
+  padding: 0;
+  height: 0;
+  border-bottom: 1px solid #eee;
+  margin: 4px 1px;
+}
+.ui-context-menu-layer .ui-context-menu-item:hover,
+.ui-workarea-menu-layer .ui-context-menu-item:hover {
+  background-color: #e8f6ff;
+}
+.ui-context-menu-layer .ui-context-menu-item .icon-test,
+.ui-workarea-menu-layer .ui-context-menu-item .icon-test {
+  background-position: -155px -93px;
+}
+.ui-context-menu-layer .ui-context-menu-item .icon-rename,
+.ui-workarea-menu-layer .ui-context-menu-item .icon-rename {
+  top: 6px;
+  background-position: -174px -93px;
+}
+.ui-context-menu-layer .ui-context-menu-item .icon-del,
+.ui-workarea-menu-layer .ui-context-menu-item .icon-del {
+  top: 6px;
+  background-position: 1px -114px;
+}
+.ui-context-menu-layer .ui-context-menu-item .icon-copy,
+.ui-workarea-menu-layer .ui-context-menu-item .icon-copy {
+  top: 6px;
+  background-position: -103px -114px;
+}
+.ui-context-menu-layer .ui-context-menu-item .icon-execute-begin,
+.ui-workarea-menu-layer .ui-context-menu-item .icon-execute-begin {
+  background-position: -52px -114px;
+}
+.ui-context-menu-layer .ui-context-menu-item .icon-execute-end,
+.ui-workarea-menu-layer .ui-context-menu-item .icon-execute-end {
+  background-position: -67px -114px;
+}
+.ui-context-menu-layer .ui-context-menu-item .icon-execute-node,
+.ui-workarea-menu-layer .ui-context-menu-item .icon-execute-node {
+  background-position: -35px -110px;
+}
+.ui-context-menu-layer .ui-context-menu-item .icon-check-data,
+.ui-workarea-menu-layer .ui-context-menu-item .icon-check-data {
+  background-position: -119px -112px;
+}
+/*复制实验*/
+.copy-test-box .form-group {
+  overflow: hidden;
+}
+.copy-test-box .control-label {
+  line-height: 30px;
+}
+.copy-test-box .tree-node-selector {
+  height: 122px;
+  overflow: auto;
+  border: 1px solid #CCC;
+  border-radius: 2px;
+}
+.copy-test-box table.tree-wrapper {
+  cursor: pointer;
+}
+.copy-test-box .tree-node.selected {
+  background-color: #e3f4ff;
+}
+.copy-test-box .tree-node-expander {
+  position: absolute;
+  width: 10px;
+  height: 5px;
+  top: 15px;
+  left: 20px;
+  background: url(../../images/assembly/icon.png) no-repeat;
+  background-position: -189px -1px;
+}
+.copy-test-box .tree-node td:first-child {
+  padding-left: 20px;
+}
+.copy-test-box .tree-node-label-wrapper-branch {
+  position: relative;
+  padding: 0 0 0 30px;
+  float: left;
+}
+.copy-test-box .tree-node-icon {
+  position: absolute;
+  width: 12px;
+  height: 10px;
+  top: 3px;
+  left: 10px;
+}
+.copy-test-box .icon-star {
+  background: url(../../images/assembly/icon.png) no-repeat -1px -1px;
+}
+.copy-test-box .button-add-folder {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  top: 13px;
+  right: 26px;
+  cursor: pointer;
+  background: url(../../images/assembly/icon.png) no-repeat -16px -114px;
+}
+/*查看数据*/
+.table {
+  margin-bottom: 0;
+}
+.modal-dialog{
+	z-index:1115;
+}
+.table > thead > tr > th {
+  border-bottom: none;
+}
+.exploration-table .ui-datatable-head {
+  background-color: #eee;
+  z-index: 2;
+}
+.exploration-table table {
+  border-top: 0 none;
+  max-width: 100%;
+  table-layout: fixed;
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+.exploration-table table th {
+  padding: 5px 8px;
+  font-weight: 400;
+}
+.exploration-table table td,
+.exploration-table table th {
+  border-left: 1px solid #e6e6e6;
+  border-bottom: 1px solid #e6e6e6;
+  border-top: medium none;
+  line-height: 1.4;
+}
+.exploration-table thead > tr > th:first-child {
+  background: #ccc none repeat scroll 0 0;
+  color: #333;
+}
+.ui-datatable-body {
+  height: 460px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  position: relative;
+}
+.ui-datatable-body tbody > tr td:first-child {
+  background: #ccc none repeat scroll 0 0;
+}
+.ui-datatable-body tbody > tr:nth-child(2n+1) {
+  background-color: #f9f9f9;
+}
+.ui-datatable-body tbody > tr:hover {
+  background-color: #e2f3ff;
+}
+/*工作区线条*/
+.jtk-connector {
+  stroke-width: 2;
+}
+.jtk-connector:hover {
+  stroke-width: 4;
+}
+.jtk-connector path {
+  stroke: #ccc;
+}
+.jtk-connector path:first-child.active {
+  stroke-dasharray: 20;
+  animation: dash 5s infinite linear;
+}
+@keyframes dash {
+  to {
+    stroke-dashoffset: 1000;
+  }
+}
+/*-----index-----*/
+.pai-home {
+  position: absolute;
+  background: #f8fafb none repeat scroll 0 0;
+  left: 60px;
+  overflow: hidden;
+  top: 0;
+  right: 0;
+  bottom: 100%;
+  z-index: 99;
+  /*padding-top: 30px;*/
+  transition: bottom 0.5s ease-in-out 0s;
+}
+.pai-home .pai-home-template {
+  background-color: #f8fafb;
+  margin: 0 auto;
+  overflow: auto;
+  width: 1120px;
+}
+.pai-home .pai-template-list:after {
+  clear: both;
+}
+.pai-home .pai-template-list::after,
+.pai-home .pai-template-list::before {
+  content: "";
+  display: table;
+}
+.pai-home .pai-template-item {
+  background-color: #fff;
+  box-shadow: 2px 2px 6px #ddd;
+  float: left;
+  height: 300px;
+  margin: 8px;
+  width: 200px;
+}
+.pai-home .pai-template-item .template-wrap {
+  height: 100%;
+  position: relative;
+  width: 100%;
+}
+.pai-home .pai-template-item .icon {
+  display: inline-block;
+  width: 26px ;
+  height: 26px;
+}
+.pai-home .pai-template-item .icon-plus-o {
+  background: url(../../images/index/icon-plus-o.png) no-repeat;
+}
+.pai-home .pai-template-item .text {
+  color: #fff;
+  display: block;
+  margin-top: 8px;
+}
+.pai-home .pai-template-item.template-empty {
+  background-color: #7abaf5;
+  cursor: pointer;
+  padding-top: 124px;
+  text-align: center;
+}
+.pai-home .template-title {
+  padding: 20px 10px 10px;
+  font-size: 16px;
+  color: #666666;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.pai-home .template-desc {
+  padding: 0 10px;
+  font-size: 12px;
+  color: #999999;
+  height: 55px ;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  display: -moz-box;
+  -moz-line-clamp: 3;
+  -moz-box-orient: vertical;
+}
+.pai-home .template-social {
+  padding: 10px 10px;
+  font-size: 12px;
+  color: #bababa;
+}
+.pai-home .template-btns {
+  padding: 0px 10px;
+  position: relative;
+}
+.pai-home .template-btns a {
+  font-size: 12px;
+  color: #0c84f4;
+}
+.pai-home .template-btns .create-template {
+  padding-right: 13px;
+  padding-left: 20px;
+  border-right: 1px solid #dcdddd;
+}
+.pai-home .template-btns .create-template:before {
+  content: "";
+  position: absolute;
+  left: 10px;
+  top: 0px;
+  width: 16px;
+  height: 16px;
+  background: url(../images/icon.png) no-repeat -138px -114px;
+}
+.pai-home .template-btns .view-document {
+  padding-left: 30px;
+}
+.pai-home .template-btns .view-document:before {
+  content: "";
+  position: absolute;
+  right: 65px;
+  top: 0;
+  width: 16px;
+  height: 16px;
+  background: url(../images/icon.png) no-repeat -159px -114px;
+}
+.btn-more-template {
+  margin: 20px auto;
+}
+.btn-more-template a {
+  font-size: 12px ;
+  color: #999999;
+  position: relative;
+}
+.btn-more-template a:after {
+  content: "";
+  position: absolute;
+  top: 4px;
+  right: -20px;
+  width: 12px ;
+  height: 7px ;
+  background: url(../images/icon.png) no-repeat -177px -114px;
+}
+/*----------------------------数据源 begin-------------------------------------*/
+.createTable-box {
+  font-size: 12px;
+}
+.createTable-box .has-error .form-control {
+  border-color: #f15e5e;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+}
+.createTable-box .form-control-error {
+  color: #ef5f61;
+  font-size: 12px;
+  font-weight: 400;
+  height: 16px;
+  line-height: 16px;
+  margin: 5px 0 0;
+  padding-left: 0px;
+  position: relative;
+}
+.createTable-box .modal-body {
+  height: 446px;
+}
+.createTable-box .right_wrap {
+  width: 100%;
+}
+.createTable-box .attention-text {
+  background-color: #fcf8e3;
+  border: 1px solid #e6e6e6;
+  border-radius: 2px;
+  color: #888;
+  padding: 5px 0;
+  text-align: center;
+}
+.createTable-box .fill-hide,.copy-test-box .fill-hide{
+  position: absolute;
+  top: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+.copy-test-box .fill-hide{
+	left:0;
+}
+.createTable-box .form-group label {
+  font-weight: 400;
+}
+.createTable-box .data-tips {
+  position: absolute;
+  right: 0;
+}
+.createTable-box .form-control {
+  height: 30px;
+}
+.createTable-box .data-show {
+  flex-grow: 1;
+}
+.createTable-box .data-show label {
+  display: block;
+  position: relative;
+}
+.createTable-box .data-show .file-name,
+.createTable-box .data-show .data-tips {
+  color: #289de9;
+  margin-left: 10px;
+}
+.createTable-box .flex-grow-1 {
+  position: relative;
+  flex-grow: 1;
+}
+.createTable-box .flex-grow-inner {
+  overflow: auto;
+  height: 160px;
+}
+.createTable-box .right_wrap .table > tbody > tr > td:nth-child(2),
+.createTable-box .right_wrap .table > tbody > tr > td:first-child {
+  width: auto;
+}
+.createTable-box .right_wrap .table > tbody > tr > td {
+  text-align: center;
+  color: #333;
+}
+.createTable-box .form-item-tips {
+  color: #289de9;
+  margin-left: 10px;
+}
+.createTable-box .btn-add {
+  position: absolute;
+  right: 5px;
+  top: 4px;
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  background: url(../../images/assembly/icon.png) no-repeat -1px -135px;
+}
+.createTable-box .table-schema-editor tfoot tr td {
+  background-color: #fcf8e3;
+  color: #999;
+  line-height: 1.66667;
+  text-align: center;
+}
+.createTable-box .table > thead > tr > th {
+  text-align: center;
+}
+.createTable-box .right_wrap .table > thead > tr > th:first-child,
+.createTable-box .right_wrap .table > thead > tr > th:nth-child(2) {
+  width: auto;
+  position: relative;
+}
+.createTable-box .table > tbody > tr > td {
+  padding-left: 10px;
+}
+.createTable-box .table-schema-editor table .form-control {
+  height: 22px;
+  padding-left: 5px;
+  padding-right: 5px;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+  color: #555;
+  display: block;
+  font-size: 12px;
+  line-height: 1.66667;
+  transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+  width: 100%;
+}
+.createTable-box .table label {
+  margin-bottom: 0;
+}
+.createTable-box .ui-checkbox {
+  position: absolute;
+  top: 5px;
+}
+.createTable-box .select-hacker .form-control {
+  padding: 0 18px 0 5px;
+}
+.createTable-box .select-hacker .form-control .form-control {
+  height: 22px;
+}
+.createTable-box .table > tbody > tr > td:last-child {
+  padding-left: 0;
+}
+.createTable-box .btn-delete {
+  display: inline-block;
+  cursor: pointer;
+  height: 16px;
+  width: 16px;
+  background: url(../../images/assembly/icon.png) no-repeat -22px -135px;
+}
+/*----------------------------数据源 end-------------------------------------*/
+
+/*---评估--- start*/
+.assessReport-box .nav-tabs {
+  margin-bottom: 12px;
+  padding-left: 35%;
+}
+.assessReport-box .ui-data-head {
+  z-index: 2;
+  background-color: #eee;
+}
+.assessReport-box .ui-data-head table {
+  table-layout: fixed;
+  width: 100%;
+  max-width: 100%;
+  border-top: 0;
+}
+.assessReport-box .ui-data-head table thead:first-child > tr:first-child > th {
+  border-top: 1px solid #e6e6e6;
+}
+.assessReport-box .ui-data-head table thead th {
+  color: #999;
+  font-weight: 400;
+  padding: 12px 20px 11px!important;
+  border-top: none;
+  border-bottom: 1px solid #e6e6e6;
+  line-height: 1.4;
+}
+.assessReport-box .ui-data-body {
+  position: relative;
+  height: 400px;
+  overflow: hidden;
+  overflow-y: auto;
+}
+.assessReport-box .ui-data-body table {
+  table-layout: fixed;
+  width: 100%;
+  max-width: 100%;
+  border-top: 0;
+}
+.assessReport-box .ui-data-body table tr.empty {
+  display: none;
+  cursor: auto!important;
+  background: inherit!important;
+}
+.assessReport-box .ui-data-body table td {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  padding: 12px 20px 11px!important;
+  border-top: none;
+  border-bottom: 1px solid #e6e6e6;
+  line-height: 1.4;
+}
+.assessReport-box .ui-data-body table tr:nth-child(odd) {
+  background-color: #f9f9f9;
+}
+.assessReport-box .ui-data-body table tr:hover {
+  background-color: #e2f3ff;
+}
+.assessReport-box .evaluate-charts {
+  flex-basis: 80%;
+  height: 480px;
+  padding: 10px 25px;
+  border: 1px solid #ddd;
+}
+.assessReport-box .evaluate-charts .chart-detail {
+  position: relative;
+  overflow: hidden;
+  width: 1000px;
+  height: 460px;
+  cursor: default;
+}
+.assessReport-box .nav-tabs > li > a:hover {
+  color: #337ab7;
+}
+/*---评估--- end*/
+
+.td-overflow {
+  width: 140px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: block;
+  border: none;
+}
+.success-remind-box,
+.fail-remind-box {
+  position: fixed;
+  top: 50%;
+  margin-top: -90px;
+  left: 50%;
+  margin-left: -90px;
+  opacity: 0;
+  display: none;
+}

@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xunfang.bdpf.mllib.assembly.mapper.FillMissingValuesChildAssemblyMapper">
+  <resultMap id="BaseResultMap" type="com.xunfang.bdpf.mllib.assembly.entity.FillMissingValuesChildAssembly">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="bdpf_mllib_assembly_fill_missing_values_id" jdbcType="VARCHAR" property="bdpfMllibAssemblyFillMissingValuesId" />
+    <result column="column_name" jdbcType="VARCHAR" property="columnName" />
+    <result column="data_type" jdbcType="VARCHAR" property="dataType" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, bdpf_mllib_assembly_fill_missing_values_id, column_name, data_type
+  </sql>
+  <select id="selectByExample" parameterType="com.xunfang.bdpf.mllib.assembly.entity.FillMissingValuesChildAssemblyExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from bdpf_mllib_assembly_fill_missing_values_child
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from bdpf_mllib_assembly_fill_missing_values_child
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from bdpf_mllib_assembly_fill_missing_values_child
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.xunfang.bdpf.mllib.assembly.entity.FillMissingValuesChildAssemblyExample">
+    delete from bdpf_mllib_assembly_fill_missing_values_child
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.xunfang.bdpf.mllib.assembly.entity.FillMissingValuesChildAssembly">
+    insert into bdpf_mllib_assembly_fill_missing_values_child (id, bdpf_mllib_assembly_fill_missing_values_id, 
+      column_name, data_type)
+    values (#{id,jdbcType=VARCHAR}, #{bdpfMllibAssemblyFillMissingValuesId,jdbcType=VARCHAR}, 
+      #{columnName,jdbcType=VARCHAR}, #{dataType,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xunfang.bdpf.mllib.assembly.entity.FillMissingValuesChildAssembly">
+    insert into bdpf_mllib_assembly_fill_missing_values_child
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="bdpfMllibAssemblyFillMissingValuesId != null">
+        bdpf_mllib_assembly_fill_missing_values_id,
+      </if>
+      <if test="columnName != null">
+        column_name,
+      </if>
+      <if test="dataType != null">
+        data_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="bdpfMllibAssemblyFillMissingValuesId != null">
+        #{bdpfMllibAssemblyFillMissingValuesId,jdbcType=VARCHAR},
+      </if>
+      <if test="columnName != null">
+        #{columnName,jdbcType=VARCHAR},
+      </if>
+      <if test="dataType != null">
+        #{dataType,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.xunfang.bdpf.mllib.assembly.entity.FillMissingValuesChildAssemblyExample" resultType="java.lang.Long">
+    select count(*) from bdpf_mllib_assembly_fill_missing_values_child
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update bdpf_mllib_assembly_fill_missing_values_child
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bdpfMllibAssemblyFillMissingValuesId != null">
+        bdpf_mllib_assembly_fill_missing_values_id = #{record.bdpfMllibAssemblyFillMissingValuesId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.columnName != null">
+        column_name = #{record.columnName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dataType != null">
+        data_type = #{record.dataType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update bdpf_mllib_assembly_fill_missing_values_child
+    set id = #{record.id,jdbcType=VARCHAR},
+      bdpf_mllib_assembly_fill_missing_values_id = #{record.bdpfMllibAssemblyFillMissingValuesId,jdbcType=VARCHAR},
+      column_name = #{record.columnName,jdbcType=VARCHAR},
+      data_type = #{record.dataType,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xunfang.bdpf.mllib.assembly.entity.FillMissingValuesChildAssembly">
+    update bdpf_mllib_assembly_fill_missing_values_child
+    <set>
+      <if test="bdpfMllibAssemblyFillMissingValuesId != null">
+        bdpf_mllib_assembly_fill_missing_values_id = #{bdpfMllibAssemblyFillMissingValuesId,jdbcType=VARCHAR},
+      </if>
+      <if test="columnName != null">
+        column_name = #{columnName,jdbcType=VARCHAR},
+      </if>
+      <if test="dataType != null">
+        data_type = #{dataType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xunfang.bdpf.mllib.assembly.entity.FillMissingValuesChildAssembly">
+    update bdpf_mllib_assembly_fill_missing_values_child
+    set bdpf_mllib_assembly_fill_missing_values_id = #{bdpfMllibAssemblyFillMissingValuesId,jdbcType=VARCHAR},
+      column_name = #{columnName,jdbcType=VARCHAR},
+      data_type = #{dataType,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <insert id="batchInsertChild" parameterType="java.util.List">
+    insert into bdpf_mllib_assembly_fill_missing_values_child (id, bdpf_mllib_assembly_fill_missing_values_id, column_name, data_type)
+    values
+    <foreach collection="list" index="index" item="item" separator=",">
+      ( #{item.id}, #{item.bdpfMllibAssemblyFillMissingValuesId}, #{item.columnName}, #{item.dataType})
+    </foreach>
+  </insert>
+</mapper>

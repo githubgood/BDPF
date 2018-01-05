@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xunfang.bdpf.experiment.clas.mapper.ClasMapper">
+  <resultMap id="BaseResultMap" type="com.xunfang.bdpf.experiment.clas.entity.Clas">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="code" jdbcType="VARCHAR" property="code" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="num" jdbcType="INTEGER" property="num" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, code, name, num, description
+  </sql>
+  <select id="selectByExample" parameterType="com.xunfang.bdpf.experiment.clas.entity.ClasExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from bdpf_experiment_class
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from bdpf_experiment_class
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from bdpf_experiment_class
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.xunfang.bdpf.experiment.clas.entity.ClasExample">
+    delete from bdpf_experiment_class
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.xunfang.bdpf.experiment.clas.entity.Clas">
+    insert into bdpf_experiment_class (id, code, name, 
+      num, description)
+    values (#{id,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{num,jdbcType=INTEGER}, #{description,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xunfang.bdpf.experiment.clas.entity.Clas">
+    insert into bdpf_experiment_class
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="code != null">
+        code,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="num != null">
+        num,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null">
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="num != null">
+        #{num,jdbcType=INTEGER},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.xunfang.bdpf.experiment.clas.entity.ClasExample" resultType="java.lang.Long">
+    select count(*) from bdpf_experiment_class
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update bdpf_experiment_class
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.code != null">
+        code = #{record.code,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.num != null">
+        num = #{record.num,jdbcType=INTEGER},
+      </if>
+      <if test="record.description != null">
+        description = #{record.description,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update bdpf_experiment_class
+    set id = #{record.id,jdbcType=VARCHAR},
+      code = #{record.code,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      num = #{record.num,jdbcType=INTEGER},
+      description = #{record.description,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xunfang.bdpf.experiment.clas.entity.Clas">
+    update bdpf_experiment_class
+    <set>
+      <if test="code != null">
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="num != null">
+        num = #{num,jdbcType=INTEGER},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xunfang.bdpf.experiment.clas.entity.Clas">
+    update bdpf_experiment_class
+    set code = #{code,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      num = #{num,jdbcType=INTEGER},
+      description = #{description,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="getClasCount" parameterType="Map" resultType="long">
+		select count(id)
+		from bdpf_experiment_class
+		where 1=1
+		<if test="createUser != null and createUser != ''">
+			and  find_in_set(id,(select class_id from bdpf_system_user where account = '${createUser}'))
+		</if>
+		<if test="keywords != null and keywords != ''">
+			and name like '%${keywords}%'
+		</if>
+	</select>
+  <select id="queryClasByPage" parameterType="Map" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from bdpf_experiment_class
+		where 1=1
+		<if test="createUser != null and createUser != ''">
+			and find_in_set(id,(select class_id from bdpf_system_user where account = '${createUser}'))
+		</if>
+		<if test="keywords != null and keywords != ''">
+			and name like '%${keywords}%'
+		</if>
+		order by code desc
+		limit ${skip},${limit}
+	</select>
+	
+	  <select id="queryClassUser" parameterType="Map" resultType="com.xunfang.bdpf.experiment.clas.entity.Clas">
+		select
+		distinct class.id as id,class.`name` as name
+		from bdpf_experiment_class class ,bdpf_system_user user
+		where  1=1
+		<if test="createUser != null and createUser != ''">
+		    and find_in_set(class.id,user.class_id)
+			and find_in_set (class.id,(select class_id from bdpf_system_user where account = '${createUser}'))
+		</if>
+	</select>
+	
+	<insert id="batchInsertClas" parameterType="java.util.List">
+		update bdpf_experiment_class (id, code, name,num,description)
+		values
+	<foreach collection="list" index="index" item="item" separator=",">
+			( #{item.id}, #{item.code}, #{item.name}, #{item.num}, #{item.description})
+   </foreach>
+	</insert>
+	
+	<update id="batchUpdateClas" parameterType="java.util.List">
+		update bdpf_experiment_class set
+    	 code=
+	  <foreach collection="list" item="item" index="index" separator=" " open="case ID" close="end">
+	      when #{item.id,jdbcType=VARCHAR} then #{item.code,jdbcType=VARCHAR}
+	  </foreach>
+	  	 ,name=
+	  <foreach collection="list" item="item" index="index" separator=" " open="case ID" close="end">
+	      when #{item.id,jdbcType=VARCHAR} then #{item.name,jdbcType=VARCHAR}
+	  </foreach>
+	  	  ,num=
+	  <foreach collection="list" item="item" index="index" separator=" " open="case ID" close="end">
+	      when #{item.id,jdbcType=VARCHAR} then #{item.num,jdbcType=VARCHAR}
+	  </foreach>
+	  	 ,description=
+	  <foreach collection="list" item="item" index="index" separator=" " open="case ID" close="end">
+	      when #{item.id,jdbcType=VARCHAR} then #{item.description,jdbcType=VARCHAR}
+	  </foreach>
+	  	 where id in
+	  <foreach collection="list" index="index" item="item" separator="," open="(" close=")">
+	      #{item.id,jdbcType=VARCHAR}
+	  </foreach>
+  </update>
+	
+</mapper>
